@@ -1,0 +1,54 @@
+{%extends 'base.html'%}
+
+<div class="container">
+
+  <div>
+    {%include 'nav.html'%}
+  </div>
+  {%block content%}
+  
+  <div class="row mt-4">
+      <h3>
+        Informoções sobre tal
+      </h3>
+          <div class="col-md-6 mt-4">
+            <!-- readonlye, é para não se editado -->
+            Nome:
+            <input type="text" value="{{obj.nome}}" class="form-control bg-secondary text-white" readonly>
+          </div>
+          <div class="col-md-6 mt-4">
+            <!-- readonlye, é para não se editado -->
+            Email:
+            <input type="text" value="{{obj.email}}" class="form-control bg-secondary text-white" readonly>
+          </div>
+          <div class="col-md-6 mt-4">
+            <!-- readonlye, é para não se editado -->
+            Assunto:
+            <input type="text" value="{{obj.assunto}}" class="form-control bg-secondary text-white" readonly>
+          </div>
+          <div class="col-md-6 mt-4">
+            <!-- readonlye, é para não se editado -->
+            Respondido:
+            <input type="text" value="{{obj.respostas}}" class="form-control bg-secondary text-white" readonly>
+          </div>
+          <div class="col-12 mt-4">
+            <!-- readonlye, é para não se editado -->
+            Mensagem::
+            <textarea type="text" rows="10"  class="form-control bg-secondary text-white" readonly>{{obj.mensagem}}</textarea>
+          </div>
+      
+   </div>
+   <hr>
+   <div>
+    <p>Para comprar voce precisa ter cadastro!</p>
+    <a href="{{url_for('cadastro')}}">Fazer cadastro!</a>
+   </div>
+</div>
+
+    <!-- check if is validation -->
+  <!-- </div>
+  {#{obj.nome}#}
+</div> -->
+
+
+{%endblock%}

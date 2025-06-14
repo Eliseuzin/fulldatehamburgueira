@@ -1,0 +1,55 @@
+{%extends 'base.html' %}
+
+{% block content%}
+  <div>
+    <h3>First passe about Framework Flask</h3>
+  </div>
+  <!-- para fazer inclusao de aquivos já prontos, sem necessidade de ficar criando novamente -->
+  <div>
+    {%include 'nav.html'%}
+  </div>
+  <div>
+    <p>
+      Today, starting a new history about backend using Flask
+    </p>
+    <!-- não podemos em hipotese alguma deixar variaveis vazias -->
+    <!-- Exemplo de uso de variável: {{ variavel_exemplo }} -->
+     <!-- e quando usar diciónario chamamo ele antes da viareveis -->
+    <p>Welcome, {{dici.usuario}}, today, initially begining the study about Flask, a framework very utilly in python.</p><br/>
+
+    <p>You have {{dici.idade}} years and today is {{dici.estado_civil}}</p>
+    <a href="/sport">Link feito diretamente</a><br/>
+    <!-- Link encaminhado automaticamente utilizando url_for -->
+    <a href="{{url_for('contato')}}">Link encaminhado automaticamente</a>
+
+    <!-- para saber se tem um usuario logado ou nao -->
+    {% if current_user.is_authenticated %}
+        <span class="btn btn-primary">{{current_user.nome}}{{current_user.sobrenome}}</span>
+        <a href="{{url_for('logout')}}" class="btn btn-danger">Sair</a>
+
+    {%else %}
+            <form action="" method="post">
+          {{ form.hidden_tag() }}
+
+              <div class="mb-3">
+                {{ form.email.label(class="form-label") }}
+                {{ form.email(class="form-control") }}
+              </div>
+
+              <div class="mb-3">
+                {{ form.senha.label(class="form-label") }}
+                {{ form.senha(class="form-control") }}
+              </div>
+
+              {{ form.btnSubmit(class="btn btn-primary") }}
+
+              Não tenho cadastro!<a href="{{url_for('cadastro')}}">Faça seu cadastro</a>
+        </form>
+
+    {%endif%}
+
+  </div>
+  <div>
+
+  </div>
+{%endblock%}

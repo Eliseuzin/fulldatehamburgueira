@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% block content%}
+
+     <nav>
+        <ul class="nav">
+          <li>
+            <a href="/" class="btn btn-secondary">Início</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-success" href="{{ url_for('contato') }}"> Link para Contato</a>
+          </li>
+          <li>
+          <a class="btn btn-primary" href="{{ url_for('contatolista') }}"> Link para Lista de Contatos<a>
+
+          </li>
+        </ul>
+    </nav>
+{%endblock%}
