@@ -1,7 +1,7 @@
 from estudo import app
 from flask import render_template  
 #pip install flask
-@app.route('/', methods=["GET","POST"])
+@app.route("/", methods=["GET","POST"])
 def homepage():
       return render_template('index.html')
     # usuario="eliseu"
