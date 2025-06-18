@@ -3,3 +3,30 @@ from estudo import app
 if __name__=="__main__":
   #sempre que acontecer uma mudança ele estará iniciando novamente
   app.run(debug=True)
+
+#  Criar o ambiente virtual
+# No seu terminal (cmd), execute:
+
+#digitar 'dir' para conferir se a pasta venv existir
+#A pasta venv tem que aparecer no projeto, caso contrário execute:
+# python -m venv venv
+
+#Caso de erro indica que você está tentando executar o comando de ativação do ambiente virtual no PowerShell, mas está usando a sintaxe de outro terminal (cmd).
+
+#PARA COMANDO CMD
+
+#python -m venv venv para criar o ambiente virtual
+#  ativar o ambiente virtual
+
+# venv\Scripts\activate
+# Desativar o ambiente virtual (quando terminar)
+# deactivate
+
+#caso de um erro como: não pode ser carregado porque a execução de scripts foi desabilitada neste sistema. Temos que alterar a política de execução apenas para a sessão atual utilizando o camando:
+#Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+#depois ativa utilizando: .\venv\Scripts\Activate.ps1
+
+#  No PowerShell, o comando correto é:
+# .\venv\Scripts\Activate
+
