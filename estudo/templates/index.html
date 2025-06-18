@@ -1,26 +1,15 @@
 {%extends 'base.html'%}
 {%block base%}
 <div class="container">
-como vao as coisa por ai?
-<form action="" method="post">
   <div class="mb-3">
-    <!DOCTYPE html>
-<html lang="PT-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"/>
+
     <title>Zim hamburgueria</title>
-    <script
-      src="https://kit.fontawesome.com/8dbc803407.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="hamburgueria.css">
-  </head>
-  <body>
+
           <header >
             <div>
-              <img src="hamburguer1.webp" alt="Logo hamburgue" class="produtosham" />
+              <!-- <img src="hamburguer1.webp" alt="Logo hamburgue" class="produtosham" /> -->
+              <img src="{{ url_for('static', filename='img/hamburguer1.webp') }}" alt="Logo hamburguer" class="produtosham" />
+
               <h1 id="mainaddress">Zim Hamburgueira</h1>
               <span id="subtitulo">Rua trinta e sete, 81, São Luiz -MG/BH</span>
               <div id="horariborda">
@@ -35,11 +24,9 @@ como vao as coisa por ai?
             <main>
               <!--inicio do produto-->
               <div class="alinharprodutoedescriçao">
-                <img
-                  src="img/hamburguer-gourmet.webp"
-                  alt="logo hambuguer gourmet"
-                  class="produtosham"
-                />
+
+                <img src="{{ url_for('static', filename='img/hamburguer-gourmet.webp') }}" alt="logo hambuguer gourmet" class="produtosham" />
+
                 <div class="descriçaogeral">
                   <p class="nomeham">Hambuguer Goumer</p>
                   <p class="descriçaoham">
@@ -386,10 +373,6 @@ como vao as coisa por ai?
               <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
               <script src="hamburgueria.js"></script>
 
-  </body>
-</html>
-
   </div>
-</form>
 </div>
 {%endblock%}
