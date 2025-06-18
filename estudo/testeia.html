@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Teste Pagamento</title>
+  <script
+  src="https://kit.fontawesome.com/8dbc803407.js"
+  crossorigin="anonymous"
+  ></script>
+  <link rel="stylesheet" href="testeia.css">
+</head>
+<body>
+        <header >
+          <div>
+            <img src="img/hamburguer1.webp" alt="Logo hamburgue" class="produtosham" />
+            <h1 id="mainaddress">Zim Hamburgueira</h1>
+            <span id="subtitulo">Rua trinta e sete, 81, São Luiz -MG/BH</span>
+            <div id="horariborda">
+              <span id="horario"> Sunday the Monday- 05pm the 00am </span>
+            </div>
+          </div>
+        </header>
+        <h2 id="titulocardapio">Conheça nosso cardápio</h2>
+        <!--inico do menu -->
+
+            <div id="menu">
+              <main>
+                <!--inicio do produto-->
+                <div class="alinharprodutoedescriçao">
+                  <img
+                    src="img/hamburguer-gourmet.webp"
+                    alt="logo hambuguer gourmet"
+                    class="produtosham"
+                  />
+                  <div class="descriçaogeral">
+                    <p class="nomeham">Hambuguer Goumer</p>
+                    <p class="descriçaoham">
+                      Pão de Brioche, maionese tradicional branca, 2 hambúrgueres de
+                      100gr, Cheddar, Bacon, Alface,, Tomate, Cebola Roxa e Molho
+                      Defumado.
+                    </p>
+                    <div class="preços">
+                      <p>R$ 39.99</p>
+                      <button  id="39.99 "data-name="Hambuguer Goumer" data-price="39.99"
+                      aria-labelledby="labeldiv" class="addcart">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                    <!--fim do produto-->
+
+                  <!-- <h1>Pagamento de Teste</h1>
+                  <p>Preço: R$25,00</p>
+                  <button id="pagar">Pagar com Mercado Pago</button> -->
+              </main>
+
+                  <!--inico do modal(dentro do meu carrinho)-->
+                  <div id="dentrodocarrinho">
+                    <div id="subdentrodocarrinho">
+                      <h2>Meu carrinho</h2>
+    
+                  <div id="submeucarrinho" >
+                    <p id="valorfinal">Total:<span>0.00</span></p>
+                    <p>Endereço de entrega:</p>
+                    <input id="addresss" type="text" placeholder="digite seu endereço">
+                    <p id="address-warnn" style="visibility: hidden;">Por favor, digite seu endereço completo</p>
+    
+                    <div id="fimpedido">
+                      <button id="Fechar">Fechar</button>
+                      <button  id="Finalizar">Finalizar</button>
+                    </div>
+                  </div>
+                  <!-- inicio de outro teste-->
+    
+                   <!--E deu certo, Glória a Deus-->
+    
+                  <div id="subbottom">
+    
+                    <p id="valortotal">Total:<span>0.00</span></p>
+                    <!-- <p>Seu nome:</p> -->
+                    <label for="address">Digite seu nome:</label>
+                    <input id="addressnome" type="text" placeholder="seu nome">
+                    <p id="address-warnnome" >Um nome valido, por favor!!!</p><br>
+    
+                    <!-- <p>Endereço de entrega:</p> -->
+                    <label for="address">Endereço de entrega:</label>
+                    <input id="address" type="text" placeholder="bl. e apt. caso necessário">
+                    <p id="address-warn" >O endereço está vazio!!</p><br>
+                    
+                    <label for="address">Celular para contato: </label>
+                    <input id="addressphone" type="number" placeholder="seu numero!" >
+                     <p id="address-warnphone" >Um numero valido, por favor!!!</p><br>
+    
+                     <!-- <div id="pagar">
+                      <button id="pagarPedido">Pagar pedido</button>
+                    </div> -->
+                    
+                    <div id="pagamercado">
+                      <!-- <h1>Pagamento de Teste</h1> -->
+                      <!-- <p>Preço: R$25,00</p> -->
+                      <button id="pagar">Pagar com Mercado Pago</button>
+                    </div>
+    
+                    <div id="endpedido">
+                      <button id="out">Fechar</button>
+                      <button id="Finish">Finalizar</button>
+                    </div>
+                  </div>
+                                <!-- fim de outro teste-->
+    
+                  <!-- <div id="itensadd"></div> -->
+    
+                </div>
+              </div>
+              <!--fim do modal(dentro do meu carrinho)-->
+    
+                          <!-- inico meu carrinho-->
+    
+              <footer>
+                <button id="meucarrinho">
+                  (<span id="quantidadecarinho">0</span>)
+                  Veja meu carrinho
+                  <i class="fa-solid fa-cart-shopping"></i></i>
+                </button>
+              </footer>
+    
+                    <!-- fim do meu carrinho-->
+  
+                  <!-- fim do meu carrinho-->
+
+        <!-- <script>
+          document.getElementById("pagar").addEventListener("click", function () {
+            fetch("https://4f85-2804-540-153-2d00-d4da-ebe0-759a-2fb6.ngrok-free.app/criar_pagamento", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                titulo: "Pedido Teste",
+                preco: 25.00
+              })
+            })
+              .then(response => response.json())
+              .then(data => {
+                if (data.init_point) {
+                  window.location.href = data.init_point;
+                } else {
+                  alert("Erro ao gerar link de pagamento.");
+                }
+              })
+              .catch(error => {
+                console.error("Erro na requisição:", error);
+              });
+          });
+        </script> -->
+        <script src="testeia.js">testeia</script>
+</body>
+</html>
