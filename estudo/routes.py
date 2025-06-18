@@ -1,5 +1,5 @@
 from estudo import app
-from flask import render_template  
+from flask import render_template, url_for  
 #pip install flask
 @app.route("/", methods=["GET","POST"])
 def homepage():
