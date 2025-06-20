@@ -174,7 +174,7 @@ Addressinput.addEventListener("input", function (event) {
 
 document.getElementById("pagarPedido").addEventListener("click", function () {
   // Pegue o valor total do pedido (já mostrado na tela)
-  const Valortotal = parseFloat(document.getElementById("valortotal").textContent);
+  const Valortotal = parseFloat(document.querySelector("valortotal").textContent);
 
   // Envie para o backend Flask para gerar o link de pagamento
   fetch("https://0c37-2804-540-153-2d00-c187-5c88-abfe-fac3.ngrok-free.app/criar_pagamento", {
@@ -184,15 +184,8 @@ document.getElementById("pagarPedido").addEventListener("click", function () {
     },
     body: JSON.stringify({
       titulo: "Pedido Hamburgueria",
-      preco: Valortotal.toFixed(2)
+      preco: total.toFixed(2)
     })
-
-      //valor total do carrinho
-  // Valortotal.textContent = `Total a Pagar: ${total.toLocaleString("pt-BR", {
-  //   style: "currency",
-  //   currency: "BRL",
-  // })}`;
-
   })
     .then(response => response.json())
     .then(data => {
@@ -272,6 +265,10 @@ Finish.addEventListener("click", function () {
     Addresswarninputphone.style.display="none"
   }
 
+const Addressinput = document.getElementById("address");
+ //fazer a busca do endereço de entrega utilizando api do google maps
+
+
   //ENVIAR PARA O WHATSAPP
   // console.log(listcar);
 
@@ -300,8 +297,8 @@ Finish.addEventListener("click", function () {
 // FUNÇÃO PARA VERIFICAR SE A LOJA ESTA ABERTA OU FECHADA
 function verificaropen() {
   const data = new Date();
-  const hora = data.getHours();
-  // const hora = 24 ;
+  // const hora = data.getHours();
+  const hora = 20 ;
   // return hora >= 16 || hora <= 23;
   return hora >= 16 && hora <24;
 
