@@ -8,6 +8,7 @@ const Valortotal = document.getElementById("valortotal");
 const Fechar = document.getElementById("Fechar");
 const Finalizar = document.getElementById("Finalizar");
 const Quantidadecarinho = document.getElementById("quantidadecarinho");
+//fazer a busca do endereço de entrega utilizando api do google maps
 const Addressinput = document.getElementById("address");
 const addressnome=document.getElementById("addressnome")
 const addressphone=document.getElementById("addressphone");
@@ -223,9 +224,21 @@ Finish.addEventListener("click", function () {
 
   if (listcar.length === 0) return;
 
+    if(addressnome.value===""){
+    Addresswarninputnome.style.display="block"
+    Addresswarninputnome.innerText="Um nome, por favor!!!"
+    return;
+  }else if(addressnome.value.length<=3){
+    Addresswarninputnome.style.display="block"
+    Addresswarninputnome.innerText="Nome precisa ter mais de 3 caracteres! "
+    return;
+  }else{
+    Addresswarninputnome.style.display="none"
+  }
+
   if (Addressinput.value === "") {
     Addresswarninput.style.display = "block";
-    Addresswarninput.innerText = "O endereço está vazio!";
+    Addresswarninput.innerText = "Endereço completo, por favor!!!";
     return;
   } else if (Addressinput.value.length <= 3) {
     Addresswarninput.style.display = "block";
@@ -236,20 +249,9 @@ Finish.addEventListener("click", function () {
     Addresswarninput.style.display = "none";
   }
 
-  if(addressnome.value===""){
-    Addresswarninputnome.style.display="block"
-    Addresswarninputnome.innerText="Um nome valido, por favor!!!"
-    return;
-  }else if(addressnome.value.length<=3){
-    Addresswarninputnome.style.display="block"
-    Addresswarninputnome.innerText="Nome precisa ter mais de 3 caracteres! "
-    return;
-  }else{
-    Addresswarninputnome.style.display="none"
-  }
   if(addressphone.value===""){
     Addresswarninputphone.style.display="block"
-    Addresswarninputphone.innerText="Um numero valido, por favor!!!"
+    Addresswarninputphone.innerText="Numero para contato, por favor!"
     return;
   } 
   else if (addressphone.value.length<=10){
@@ -264,9 +266,6 @@ Finish.addEventListener("click", function () {
   }else{
     Addresswarninputphone.style.display="none"
   }
-
-const Addressinput = document.getElementById("address");
- //fazer a busca do endereço de entrega utilizando api do google maps
 
 
   //ENVIAR PARA O WHATSAPP
