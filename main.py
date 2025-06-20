@@ -7,6 +7,7 @@ if __name__=="__main__":
 #  Criar o ambiente virtual
 # No seu terminal (cmd), execute:
 
+
 #digitar 'dir' para conferir se a pasta venv existir
 #A pasta venv tem que aparecer no projeto, caso contrário execute:
 # python -m venv venv
