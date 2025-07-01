@@ -1,7 +1,6 @@
 #pip install flask
 from estudo import app
 from flask import render_template, url_for 
-from flask
 # inicio da nosso controle de login.
 # pip install flask-login flask-bcrypt 
 @app.route("/", methods=["GET","POST"])
