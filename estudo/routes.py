@@ -5,7 +5,6 @@ from flask import redirect,flash
 
 # inicio da nosso controle de login.
 # pip install flask-login flask-bcrypt 
-from flask
 @app.route("/", methods=["GET","POST"])
 def homepage():
       return render_template('index.html')
@@ -20,9 +19,10 @@ def homepage():
     #  }
 @app.route('/cadastro/',methods=['GET','POST'])
 def cadastro():
-  form=Userform()
-  if form.validate_on_submit():
-    user=form.save()
-    flash(f'Usuario{user.username}Cadastrodo com sucesso! ',' success')
-    return redirect(url_for('homepage'))
-  return render_template('cadastro.html', form=form)
+      return render_template('cadastro.html')
+  # form=Userform()
+  # if form.validate_on_submit():
+  #   user=form.save()
+  #   flash(f'Usuario{user.username}Cadastrodo com sucesso! ',' success')
+  #   return redirect(url_for('homepage'))
+  # return render_template('cadastro.html', form=form)
