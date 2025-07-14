@@ -15,7 +15,7 @@ from flask_bcrypt import Bcrypt
 # então você está rodando o Python errado, e o flask_login não está instalado lá.
 
 # 💡 É o equivalente a dizer:
-"Ei, instale esse pacote exatamente neste projeto aqui, não importa o resto do sistema!"
+# "Ei, instale esse pacote exatamente neste projeto aqui, não importa o resto do sistema!"
 
 # .\venv\Scripts\pip.exe install flask-bcrypt
 
