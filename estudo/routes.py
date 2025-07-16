@@ -2,27 +2,22 @@
 from estudo import app
 from flask import render_template, url_for 
 from flask import redirect,flash
+from flask_login import login_user, logout_user, current_user
 
-# inicio da nosso controle de login.
-# pip install flask-login flask-bcrypt 
+from estudo.forms import UserForm
+
+
 @app.route("/", methods=["GET","POST"])
 def homepage():
       return render_template('index.html')
-    # usuario="eliseu"
-    # idade=24
-    # estado_civil="solteiro"
 
-    # dici={
-    #     'usuario': usuario,
-    #     'idade':idade,
-    #     'estado_civil':estado_civil
-    #  }
 @app.route('/cadastro/',methods=["GET","POST"])
 def cadastro():
-      return render_template('cadastro.html')
-  # form=Userform()
-  # if form.validate_on_submit():
-  #   user=form.save()
-  #   flash(f'Usuario{user.username}Cadastrodo com sucesso! ',' success')
-  #   return redirect(url_for('homepage'))
-  # return render_template('cadastro.html', form=form)
+    form=UserForm()
+    if form.validate_on_submit():
+        user=form.save()
+        login_user(user, remember=True)
+        flash('Cadastro realizado com sucesso! Você já logado. ','success')
+
+
+    return render_template('cadastro.html')
