@@ -17,7 +17,7 @@ def homepage():
     #     'idade':idade,
     #     'estado_civil':estado_civil
     #  }
-@app.route('/cadastro/',methods=['GET','POST'])
+@app.route('/cadastro/',methods=["GET","POST"])
 def cadastro():
       return render_template('cadastro.html')
   # form=Userform()
