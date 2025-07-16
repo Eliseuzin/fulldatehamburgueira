@@ -8,7 +8,7 @@
 <form action="" method="post">
     {{form.hidden_tag()}}
     <div class="mb-3">
-        {{form.nome.label(="form-label")}}
+        {{form.nome.label("form-label")}}
         {{form.nome(class="form-control")}}
     </div>
     <div class="mb-3">
@@ -27,9 +27,9 @@
         {{form.senha(class="form-control")}}
     </div>
     <div class="mb-3">
-        {{form.confirmar_senha.label(class="form-label")}}
-        {{form.confirmar_senha(class="form-control")}}
-        {%for error in form.confirmar_senha.errors%}
+        {{form.confirmarsenha.label(class="form-label")}}
+        {{form.confirmarsenha(class="form-control")}}
+        {%for error in form.confirmarsenha.errors%}
         <div class="alert alert-danger"></div>
         {%endfor%}
     </div>
