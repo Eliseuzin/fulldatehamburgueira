@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_login import LoginManager
+# from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 
 # ✅ Causa prováveis de erros:
@@ -24,9 +24,9 @@ from flask_bcrypt import Bcrypt
 app=Flask(__name__)
 
 # controle de login
-login_manager=LoginManager(app)
-login_manager.login_view='login'
-bcrypt=Bcrypt(app)
+# login_manager=LoginManager(app)
+# login_manager.login_view='login'
+# bcrypt=Bcrypt(app)
 
 
 
