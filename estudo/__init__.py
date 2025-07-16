@@ -30,5 +30,5 @@ app=Flask(__name__)
 
 
 
-from estudo import routes  # importa as rotas
+from estudo.routes import homepage  # importa as rotas
 
