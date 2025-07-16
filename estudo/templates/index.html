@@ -17,8 +17,10 @@
     <link rel="stylesheet" href="static/css/hamburgueria.css">
   </head>
   <body class="bg-secondary">
+    <!-- link de cadastro -->
+          <div class="bg-secondary mt-3"><a href="{{url_for('cadastro')}}">Fazer seu cadastro</a></div>
+
           <header class="container-fluid" >
-            <div><a href="{{url_for(`cadastro`)}}"></a></div>
             <div>
                 <img src="{{ url_for('static', filename='img/hamburguer1.webp') }}" alt="logo da hamburgueria" class="produtosham" />
               <h1 id="mainaddress">Zim Hamburgueira</h1>
