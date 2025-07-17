@@ -1,0 +1,7 @@
+#uns dos primeiros arquivos a serem criados
+.venv
+#ignorar arquivos python compilado
+__pycache__/
+*.pyc
+#ignorar arquivos de ambiente "env"
+.env
