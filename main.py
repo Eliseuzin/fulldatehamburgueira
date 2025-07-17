@@ -19,7 +19,7 @@ if __name__=="__main__":
 #python -m venv venv para criar o ambiente virtual
 #  ativar o ambiente virtual
 
-# venv\Scripts\activate
+# 
 # Desativar o ambiente virtual (quando terminar)
 # deactivate
 
