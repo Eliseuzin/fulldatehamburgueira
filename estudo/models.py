@@ -1,11 +1,9 @@
-from estudo import login_manager
+from estudo import db
+from datetime import datetime
 from flask_login import UserMixin
 
 #inicio do controle de login
 # significa que você está usando o Flask-Login, mas não definiu a função obrigatória user_loader — que é necessária para o login funcionar corretamente.
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(user_id)
 
 class User(db.Model,UserMixin):
     #nullable=True, que dizer que o campo não pode ficar vazio
