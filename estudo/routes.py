@@ -11,6 +11,7 @@ from estudo.forms import UserForm
 def homepage():
       return render_template('index.html')
 
+
 @app.route('/cadastro/',methods=["GET","POST"])
 def cadastro():
     form=UserForm()
@@ -18,6 +19,7 @@ def cadastro():
         user=form.save()
         login_user(user, remember=True)
         flash('Cadastro realizado com sucesso! Você já logado. ','success')
+        return redirect(url_for('homepage'))
 
 
-    return render_template('cadastro.html')
+    return render_template('cadastro.html', form=form)
