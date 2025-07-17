@@ -70,4 +70,6 @@ login_manager.login_view='login'
 def load_user(user_id):
     return User.query.get(user_id)
 
-
+# está acontecendo porque você está tentando importar login_manager
+# de dentro do models.py, mas o login_manager só é criado no
+# __init__.py — e isso causa um "ciclo de importação" (circular import).
