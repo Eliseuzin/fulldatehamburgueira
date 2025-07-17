@@ -1,22 +1,21 @@
 from flask import Flask
-# from dotenv import load_dotenv
-# pip install flask-login flask-bcrypt
-# from flask_login import LoginManager
-# inicio da nosso controle de login.
-# pip install flask-login flask-bcrypt 
-from flask_bcrypt import Bcrypt
-from flask_login import LoginManager
-# responsavel por busca os valores
-import os
-# load_dotenv('.env')
-
 #vamos começa a configura o nosso banco de dados
 #pip install Flask-SQLAlchemy Flask-Migrate
 #depois temos de import antes de app
-# 
-
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 # vamos deixa nosso nossas chaves mais seguras utilizando variaveis de ambiente
 # pip install python-dotenv
+from dotenv import load_dotenv
+# inicio da nosso controle de login.
+# pip install flask-login flask-bcrypt
+# from flask_login import LoginManager
+from flask_login import LoginManager
+from flask_bcrypt import Bcrypt
+
+# responsavel por busca os valores
+import os
+load_dotenv('.env')
 
 
 # ✅ Causa prováveis de erros:
@@ -39,6 +38,21 @@ import os
 
 #instartar nosso aplicativo
 app=Flask(__name__)
+
+#configurar o banco de dados
+#quando criamos o banco de dados, ele chamará database.db
+app.config['SQLALCHEMY_DATABASE_URI']=os.getenv('DATABASE_URI')
+#aumenta a prioridade, e evita o checking
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+#mais para frente aprenderemos a deixa o nosso banco de dados mais seguro, sem deixa chaves de acesso livres
+app.config['SECRET_KEY']=os.getenv('SECRET_KEY')
+
+db=SQLAlchemy(app)
+migrate=Migrate(app, db)
+#comando para criar o banco de dados
+#flask db init
+#é necessário apenas um banco de dados por projeto.
+
 
 login_manager=LoginManager(app)
 bcrypt=Bcrypt(app)
