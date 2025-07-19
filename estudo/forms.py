@@ -20,7 +20,7 @@ class StoreForm(FlaskForm):
     email=StringField('Email', validators=[DataRequired()])
     senha=PasswordField('Senha', validators=[DataRequired()])
     confirmarsenha=PasswordField('Confirmar senha', validators=[DataRequired()])
-    cnpj=IntegerField('CNPJ', validators=[DataRequired()])
+    cnpj=IntegerField('CNPJ da loja', validators=[DataRequired()])
     nomedaloja=StringField('Nome da loja', validators=[DataRequired()])
     telefone=IntegerField('Telefone da loja', validators=[DataRequired()])
     endereço=StringField('Endereço da loja', validators=[DataRequired()])
