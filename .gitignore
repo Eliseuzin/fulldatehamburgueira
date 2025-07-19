@@ -5,3 +5,7 @@ __pycache__/
 *.pyc
 #ignorar arquivos de ambiente "env"
 .env
+
+
+# Assim o Git não vai tentar salvar caminhos quebrados no repositório.
+venv/
