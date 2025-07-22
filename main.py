@@ -31,3 +31,11 @@ if __name__=="__main__":
 #  No PowerShell, o comando correto é:
 # .\venv\Scripts\Activate
 
+# pip show flask-wtf
+# verificar a situçao do flask_wtf instalado
+
+# Pressione Ctrl + Shift + P
+# Digite: Reload Window e execute
+# as vezes ajudar a corrigir problemas de importação
+
+
