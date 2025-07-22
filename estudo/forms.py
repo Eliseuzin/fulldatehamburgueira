@@ -13,7 +13,7 @@ class UserForm(FlaskForm):
     senha=PasswordField('Senha', validators=[DataRequired()])
     confirmarsenha=PasswordField('Confirmar senha', validators=[DataRequired(), EqualTo('senha')])
     btnSubmit=SubmitField('Cadastrar usuário')
-
+\
 class StoreForm(FlaskForm):
     nome=StringField('Nome', validators=[DataRequired()])
     sobrenome=StringField('Sobrenome', validators=[DataRequired()])
