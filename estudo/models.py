@@ -26,3 +26,10 @@ class Store(db.Model,UserMixin):
     telefone=db.Column(db.Integer, nullable=True)
     endereço=db.Column(db.String, nullable=True)
  #fim do controle de login loja
+
+#comando para criar o banco de dados
+#flask db init
+#é necessário apenas um banco de dados por projeto.
+# para fazer roda as alteraçoes no banco de dados
+# flask db migrate -m "mensagem"
+# flask db upgrade
