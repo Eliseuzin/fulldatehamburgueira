@@ -28,14 +28,15 @@ if __name__=="__main__":
 
 #depois ativa utilizando: .\venv\Scripts\Activate.ps1
 
-#  No PowerShell, o comando correto é:
-# .\venv\Scripts\Activate
+#  No PowerShell(mais comum hoje em dia), o comando correto é:
+# .\venv\Scripts\Activate.ps1
 
 # pip show flask-wtf
 # verificar a situçao do flask_wtf instalado
-
+ 
 # Pressione Ctrl + Shift + P
 # Digite: Reload Window e execute
 # as vezes ajudar a corrigir problemas de importação
 
-
+#  Isso vai automaticamente envolver o conteúdo selecionado dentro de uma <div>.
+# Emmet: Wrap with Abbreviation
