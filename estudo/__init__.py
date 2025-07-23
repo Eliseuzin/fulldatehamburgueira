@@ -57,13 +57,15 @@ migrate=Migrate(app, db)
 
 #inicio do controle de login
 from estudo.models import User
-# importa as rotas
-from estudo.routes import homepage
 
 login_manager=LoginManager(app)
 bcrypt=Bcrypt(app)
 # controle de login
 login_manager.login_view='login'
+
+with app.app_context():
+    db.create_all()
+
 
 # significa que você está usando o Flask-Login, mas não definiu a função obrigatória user_loader — que é necessária para o login funcionar corretamente.
 @login_manager.user_loader
@@ -73,3 +75,6 @@ def load_user(user_id):
 # está acontecendo porque você está tentando importar login_manager
 # de dentro do models.py, mas o login_manager só é criado no
 # __init__.py — e isso causa um "ciclo de importação" (circular import).
+
+# importa as rotas
+from estudo import routes 
