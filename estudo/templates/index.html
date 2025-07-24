@@ -18,9 +18,16 @@
   </head>
   <body class="bg-secondary">
     <!-- link de cadastro -->
-          <div class="bg-secondary mt-3"><a href="{{url_for('cadastrousuario')}}">Login</a></div>
-          <div class="bg-secondary mt-3"><a href="{{url_for('login')}}">Login oficial</a></div>
-
+          <!-- <div class="bg-secondary mt-3"><a href="{{url_for('cadastrousuario')}}">Login</a></div> -->
+          <div class="bg-secondary mt-3"><a href="{{url_for('login')}}">Login </a></div>
+     <!-- onde aprece se o usuário está logado -->
+      {% if current_user.is_authenticated %}
+      <span class="btn btn-primary">Bem-vindo, {{ current_user.nome }}!</span>
+      <a href="{{url_for('logout')}}" class="btn btn-danger">Sair</a>
+        <!-- <p>Bem-vindo, {{ current_user.nome }}!</p> -->
+      {% else %}
+        <p class="btn btn-danger">Você não está logado.</p>
+      {% endif %}
           <header class="container-fluid" >
             <div>
                 <img src="{{ url_for('static', filename='img/hamburguer1.webp') }}" alt="logo da hamburgueria" class="produtosham" />
