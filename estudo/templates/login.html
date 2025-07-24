@@ -1,9 +1,9 @@
-{%extends 'base.html%}
+{%extends 'base.html'%}
 {%block base%}
 <!-- incluir navegaçao aqui -->
- <div class="container">
+ <div class="container bg-info rounded p-4 mt-4">
     <!-- aqyu, recebera as mensagens de error -->
-     {% with messages= get_flashed_menssages(with_categories=True)%}
+     {% with messages= get_flashed_messages(with_categories=True)%}
      {% if menssagens%}
      {%for category, message in messagens%}
      <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
@@ -12,17 +12,17 @@
      </div>
      {%endfor%}
      {%endif%}
-     {%endwith}
- </div>
+     {%endwith%}
  <!-- para saber se tem usuário logado ou nao -->
   {%if current_user.is_authenticaded%}
-  <span class="btn btn-primary">{{current_user.nome}}{{currente_uswer.sobrenome}}</span>
-  <a href="{{url_for('logout')}}" class="btn btn-danger">Sair</a>
-  {%else%}
-         <form action="" method="post">
+        <span class="btn btn-primary">{{current_user.nome}}{{currente_uswer.sobrenome}}</span>
+        <a href="{{url_for('logout')}}" class="btn btn-danger">Sair</a>
+        {%else%}
+         <form action="" method="post" class="row mt-4">
+            {{form.csrf_token}}
             <h5>Faça seu login:</h5>
             {{form.hidden_tag()}}
-            <div class="mb-3">
+            <div class="col-md-6 mb-3">
                 {{form.email.label(class="form-label")}}
                 {{form.email(class="form-control")}}
 
@@ -30,14 +30,19 @@
                 <div class="alert alert-danger">{{error}}</div>
                 {%endfor%}
             </div>
-            <div class="mb-3">
-                {{form.senh.label(class="form-label")}}
+            <div class="col-md-6 mb-3">
+                {{form.senha.label(class="form-label")}}
                 {{form.senha(class="form-control")}}
+
                 {%for error in form.senha.errors%}
                 <div class="alert alert-danger">{{error}}</div>
                 {%endfor%}
             </div>
-            {{form.btnSubmit(class="btn btn-primary")}}
-            <div class="mt-2">Não tenho  cadastro <a href="{{url_for('cadastro')}}">Fazer cadastro</a></div>
+            <div class="col-md-6">{{form.btnSubmit(class="btn btn-primary")}}</div>
+            <div class="mt-2">Quero cadastrar usuário: <a href="{{url_for('cadastrousuario')}}">Cadastrar</a></div>
+            <div class="mt-2">Quero cadastrar loja: <a href="{{url_for('cadastroloja')}}">Cadastrar</a></div>
          </form>
-{%andblock%}
+</div>
+
+    {%endif%}
+{%endblock%}
