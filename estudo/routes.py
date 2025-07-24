@@ -2,28 +2,32 @@
 from estudo import app
 from flask import render_template, url_for 
 from flask import redirect,flash
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user, login_required
 from estudo.forms import LoginForm
 
 from estudo.forms import UserForm, StoreForm
 
 
-@app.route("/", methods=["GET","POST"])
+@app.route("/", methods=["GET", "POST"])
 def homepage():
-      return render_template('index.html')
+    # if current_user.is_authenticated:
+    #     return f'Olá, {current_user.nome}!'
+    # else:
+        return render_template('index.html')
+
 
 
 @app.route('/login/', methods=["GET", "POST"])
 def login():
      form=LoginForm()
+
      if form.validate_on_submit():
         #aqui, não precisa validadar nada
         login_user(form.user, remember=True)
         flash('Login realizado com sucesso!','success')
         return redirect(url_for('homepage'))
      
-
-     return render_template('login.html', form=form)      
+     return render_template('login.html', form=form)   
 
 
 
@@ -60,4 +64,7 @@ def cadastroloja():
      
      return render_template('cadastroloja.html', form=form)
         
-
+# rota de erro
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
