@@ -1,7 +1,7 @@
 #agora, iremos criar uma aplicaçao mais segura sobre o formulario e banco de dados
 #1- instalar pip install flask_wtf
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField,IntegerField
+from wtforms import StringField, PasswordField, SubmitField,IntegerField, TextAreaField
 # EqualTo verifica se um campo é == ao outro
 # para a validaçao do email precisamos instalar pip install email_validator
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
@@ -47,14 +47,14 @@ class LoginForm(FlaskForm):
     senha=PasswordField('Senha', validators=[DataRequired()])
     btnSubmit=SubmitField('Entrar')
 
-    def validade_email(self,email):
-        user=User.query.filter_(email=email.data).first()
+    def validate_email(self,email):
+        user=User.query.filter_by(email=email.data).first()
         if not user:
             raise ValidationError('E-mail não encontrado, por favor, verifique o e-mail digitado!')
         # armazenar o usuario encontrado
         self.user=user
     
-    def validade_senha(self,senha):
+    def validate_senha(self,senha):
         # só valida se o email for valido e usuário existir
         user=getattr(self,'user',None)
         if user is None:
