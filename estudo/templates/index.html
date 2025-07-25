@@ -17,17 +17,30 @@
     <link rel="stylesheet" href="static/css/hamburgueria.css">
   </head>
   <body class="bg-secondary">
-    <!-- link de cadastro -->
-          <!-- <div class="bg-secondary mt-3"><a href="{{url_for('cadastrousuario')}}">Login</a></div> -->
-          <div class="bg-secondary mt-3"><a href="{{url_for('login')}}">Login </a></div>
-     <!-- onde aprece se o usuário está logado -->
-      {% if current_user.is_authenticated %}
-      <span class="btn btn-primary">Bem-vindo, {{ current_user.nome }}!</span>
-      <a href="{{url_for('logout')}}" class="btn btn-danger">Sair</a>
-        <!-- <p>Bem-vindo, {{ current_user.nome }}!</p> -->
-      {% else %}
-        <p class="btn btn-danger">Você não está logado.</p>
-      {% endif %}
+    <!-- onde aprece se o usuário está logado -->
+       <div class="container-fluid py-2">
+         <div class="row">
+           <div class="col-12 d-flex justify-content-end flex-wrap align-items-center">
+              <!-- Botões de login/logout -->
+            {% if current_user.is_authenticated %}
+              <!-- Usuário logado: mostrar saudação e botão de logout -->
+              <span class="btn btn-primary me-2">Bem-vindo, {{ current_user.nome }}!</span>
+              <a href="{{ url_for('logout') }}" class="btn btn-danger">Sair</a>
+            {% else %}
+              <!-- Usuário não logado: mostrar botão de login -->
+               <a id="btn-login" href="{{ url_for('login') }}" class="btn btn-success">Login</a>
+              <!-- <a href="{{ url_for('login') }}" class="btn btn-success">Login</a> -->
+            {% endif %}
+             <!-- justify-content-end: empurra os botões para a direita. -->
+             <!-- 
+             flex-wrap: quebra para baixo se o espaço for pequeno (responsivo).
+             me-2: margem entre os botões.
+             mb-2: espaço abaixo dos botões em telas pequenas. -->
+              <!-- Quebrando a classe py-2:
+             p = padding (espaço interno)
+             y = eixo Y (vertical → topo e fundo)
+             2 = valor de espaçamento (vai de 0 a 5, podendo ir até auto ou responsive) -->
+
           <header class="container-fluid" >
             <div>
                 <img src="{{ url_for('static', filename='img/hamburguer1.webp') }}" alt="logo da hamburgueria" class="produtosham" />
@@ -346,15 +359,19 @@
               <i class="fa-solid fa-cart-shopping"></i></i>
             </button>
           </footer>
-
                 <!-- fim do meu carrinho-->
-                   
-                
                  <!--importaçao mensagem loja fechada-->
 
               <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+              <script>
+                // const usuarioLogado = {{ true | tojson }};
 
-              <script src="static/js/hamburgueria.js"></script>
+                // const usuarioLogado = {{ (current_user.is_authenticated | default(false)) | tojson }};
+              </script>
+              <script src="{{ url_for('static', filename='js/hamburgeriacorrigida.js') }}"></script>
 
+              <!-- <script src="static/js/hamburgeriacorrigida.js"></script> -->
+              <!-- <script src="static/js/hamburgueria.js"></script> -->
+            
   </body>
 </html>
