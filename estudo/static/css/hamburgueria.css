@@ -1,5 +1,6 @@
 body {
-  background-image: url("img/fundoloja.jpeg");
+  /* background-image: url("static/img/fundoloja.jpeg"); */
+  background-image: url("/static/img/fundoloja.jpeg");
   background-color: #ffffff20;
   background-position: center center;
   background-repeat: no-repeat;
