@@ -70,7 +70,7 @@
                           </p>
                           <div class="preços">
                             <p>R$ 39.99</p>
-                            <button  id="39.99 "data-name="Hambuguer Goumer" data-price="39.99"
+                            <button  id="btn-Hambuguer-Goumer "data-name="Hambuguer Goumer" data-price="39.99"
                             aria-labelledby="labeldiv" class="addcart">
                               <i class="fa-solid fa-cart-shopping"></i>
                             </button>
@@ -91,7 +91,7 @@
                           </p>
                           <div class="preços">
                             <p>R$ 39.99</p>
-                            <button  id="39.99"
+                            <button  id="btn-Hambuguer-Horto"
                             data-name="Hambuguer Horto" data-price="39.99" 
                             aria-labelledby="labeldiv" class="addcart">
                               <i class="fa-solid fa-cart-shopping"></i>
@@ -112,7 +112,7 @@
                           </p>
                           <div class="preços">
                             <p>R$ 44.99</p>
-                            <button  id="44.99"
+                            <button  id="btn-Hambuguer-Cheddar"
                             data-name="Hambuguer cheddar" data-price="44.99"
                             aria-labelledby="labeldiv" class="addcart">
                               <i class="fa-solid fa-cart-shopping"></i>
@@ -132,7 +132,7 @@
                           </p>
                           <div class="preços">
                             <p>R$ 59.99</p>
-                            <button id="59.99 "
+                            <button id="btn-Hambugueres-Crispy"
                             data-name="Hambugueres Crispy" data-price="59.99"
                             aria-labelledby="labeldiv" class="addcart">
                               <i class="fa-solid fa-cart-shopping"></i>
@@ -152,7 +152,7 @@
                           </p>
                           <div class="preços">
                             <p>R$ 59.99</p>
-                            <button  id="59.99"
+                            <button  id="btn-Porção-Batatas"
                             data-name="Porção Batatas" data-price="59.99"
                             aria-labelledby="labeldiv" class="addcart">
                               <i class="fa-solid fa-cart-shopping"></i>
@@ -169,7 +169,7 @@
                           <p class="descriçaoham">Acompanha apenas batatas fritas e molhos</p>
                           <div class="preços">
                             <p>R$ 34.99</p>
-                            <button  id="34.99"
+                            <button  id="btn-Batatas-fritas"
                             data-name="Batatas fritas" data-price="34.99"
                             aria-labelledby="labeldiv" class="addcart">
                               <i class="fa-solid fa-cart-shopping"></i>
@@ -191,7 +191,7 @@
                         <p class="descriçaoham"></p>
                         <div class="preços">
                           <p>R$ 15.99</p>
-                          <button  id="15.99"
+                          <button  id="btn-Coca-cola-zero2l"
                           data-name="Coca-cola zero2l" data-price="15.99"
 
                           aria-labelledby="labeldiv" class="addcart">
@@ -209,7 +209,7 @@
                         <p class="descriçaoham"></p>
                         <div class="preços">
                           <p>R$ 15.99</p>
-                          <button  id="15.99"
+                          <button  id="btn-Coca-cola-2l"
                           data-name="Coca-cola 2l" data-price="15.99"
 
                           aria-labelledby="labeldiv" class="addcart">
@@ -227,7 +227,7 @@
                         <p class="descriçaoham"></p>
                         <div class="preços">
                           <p>R$ 11.99</p>
-                          <button  id="11.99"
+                          <button  id="btn-Guarana-Antartica-zero-2l"
                           data-name="Guarana Antartica zero 2l" data-price="11.99"
 
                           aria-labelledby="labeldiv" class="addcart">
@@ -245,7 +245,7 @@
                         <p class="descriçaoham"></p>
                         <div class="preços">
                           <p>R$ 11.99</p>
-                          <button  id="11.99"
+                          <button  id="btn-Guarana-Antartica-2l"
                           data-name="Guarana Antartica 2l" data-price="11.99"
 
                           aria-labelledby="labeldiv" class="addcart">
@@ -263,7 +263,7 @@
                       <p class="descriçaoham"></p>
                       <div class="preços">
                         <p>R$ 8.99</p>
-                        <button  id="8.99"
+                        <button  id="btn-Guarana-Antartica-Lata-350ml"
                         data-name="Guarana Antartica Lata 350ml" data-price="8.99"
 
                         aria-labelledby="labeldiv" class="addcart">
@@ -281,7 +281,7 @@
                           <p class="descriçaoham"></p>
                           <div class="preços">
                             <p>R$ 8.99</p>
-                            <button  id="8.99"
+                            <button  id="btn-Coca-cola-Lata-350-ml"
                             data-name="Coca-cola Lata 350 ml" data-price="8.99"
 
                             aria-labelledby="labeldiv" class="addcart">
@@ -362,10 +362,23 @@
                 <!-- fim do meu carrinho-->
                  <!--importaçao mensagem loja fechada-->
 
-              <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-              <script>
-                const usuarioLogado : {{ (current_user.is_authenticated | default(false)) | tojson }};
-              </script>
+              <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script> -->
+              <!-- <script>
+                const usuarioLogado = {{ (current_user.is_authenticated | default(false)) | tojson }};
+                console.log("Usuário logado?", usuarioLogado);
+              </script> -->
+              <!-- <div id="status" data-usuario-logado="{{ current_user.is_authenticated | default(false) | tojson }}">
+              </div> -->
+
+
+              <div id="status" data-usuario-logado="{{ current_user.is_authenticated | default(false) | tojson }}"></div>
+
+                <form id="form-pedido">
+                  <!-- seus campos aqui -->
+                  <button type="submit">Finalizar Pedido</button>
+                </form>
+
+    
               <!-- Property assignment expected -->
               <script src="{{ url_for('static', filename='js/hamburgeriacorrigida.js') }}"></script>
                 <!-- // const usuarioLogado = {{ true | tojson }}; -->
