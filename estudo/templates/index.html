@@ -364,7 +364,7 @@
 
               <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
               <script>
-                const usuarioLogado = {{ (current_user.is_authenticated | default(false)) | tojson }};
+                const usuarioLogado : {{ (current_user.is_authenticated | default(false)) | tojson }};
               </script>
               <!-- Property assignment expected -->
               <script src="{{ url_for('static', filename='js/hamburgeriacorrigida.js') }}"></script>
