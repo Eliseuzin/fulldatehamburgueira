@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+{%block base%}
+{{form.hidden_tag()}}
+
+              <script>
+                const usuarioLogado = {{(current_user.is_authenticated | default(false)) | tojson }};
+                console.log("Usuário logado?", usuarioLogado);
+
+                if (!usuarioLogado) {
+                  const botaoLogin = document.getElementById("btn-login");
+                  if (botaoLogin) {
+                    botaoLogin.style.display = "block";
+                  }
+                } else {
+                  // Ocultar botão de login, mostrar botão de logout, etc.
+                  const botaoLogin = document.getElementById("btn-login");
+                  if (botaoLogin) {
+                    botaoLogin.style.display = "none";
+                  }
+                }
+              </script>
+              <script src="{{ url_for('static', filename='js/hamburgeriacorrigida.js') }}"></script>
+{%endblock%}
