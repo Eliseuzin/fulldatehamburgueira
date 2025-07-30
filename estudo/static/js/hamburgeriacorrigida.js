@@ -109,7 +109,8 @@ function removeritens(name) {
 // Verifica se a loja está aberta
 function verificarOpen() {
   const data = new Date();
-  const hora = data.getHours();
+  // const hora = data.getHours();
+  const hora=20;
   return hora >= 16 && hora < 24;
 }
 
@@ -126,12 +127,27 @@ if (spanhorario) {
 }
 
 // Verifica login e oculta botão de login se autenticado
-if (typeof usuarioLogado !== 'undefined' && usuarioLogado) {
-  const botaoLogin = document.getElementById("btn-login");
-  if (botaoLogin) {
-    botaoLogin.style.display = "none";
-  }
-}
+// if (typeof usuarioLogado !== 'undefined' && usuarioLogado) {
+//   const botaoLogin = document.getElementById("btn-login");
+//   if (botaoLogin) {
+//     botaoLogin.style.display = "none";
+//   }
+// }
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const statusDiv = document.getElementById("status");
+    const usuarioLogado = statusDiv.dataset.usuarioLogado === "true";
+
+    const form = document.getElementById("form-pedido");
+    form.addEventListener("submit", function (event) {
+      if (!usuarioLogado) {
+        event.preventDefault(); // 🚫 Bloqueia envio do formulário
+        alert("Você precisa estar logado para finalizar o pedido.");
+      }
+    });
+  });
+
 
 // Lógica principal de finalização
 Finish.addEventListener("click", function () {
