@@ -337,8 +337,19 @@
 
                           <div id="endpedido">
                             <button id="out">Fechar</button>
-                            <button id="Finish">Finalizar</button>
+                            <!-- <button id="Finish">Finalizar</button> -->
                           </div>
+                            <div id="status" data-usuario-logado="{{ current_user.is_authenticated | default(false) | tojson }}"></div>
+                            <form id="form-pedido">
+                              <!-- seus campos aqui -->
+                              <!-- <button type="submit">Finalizar Pedido</button> -->
+                              <button type="submit" id="Finish">Finalizar</button>
+                              <div id="aviso-login" style="display: none; color: red; font-weight: bold; margin-top: 10px;">
+                                ⚠️ Você precisa estar logado para finalizar o pedido.
+                              </div>
+
+                            </form>
+
                         </div>
                                       <!-- fim de outro teste-->
 
@@ -369,15 +380,6 @@
               </script> -->
               <!-- <div id="status" data-usuario-logado="{{ current_user.is_authenticated | default(false) | tojson }}">
               </div> -->
-
-
-              <div id="status" data-usuario-logado="{{ current_user.is_authenticated | default(false) | tojson }}"></div>
-
-                <form id="form-pedido">
-                  <!-- seus campos aqui -->
-                  <button type="submit">Finalizar Pedido</button>
-                </form>
-
     
               <!-- Property assignment expected -->
               <script src="{{ url_for('static', filename='js/hamburgeriacorrigida.js') }}"></script>
