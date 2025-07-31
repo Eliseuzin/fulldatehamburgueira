@@ -134,92 +134,204 @@ if (spanhorario) {
 //   }
 // }
 
+document.addEventListener("DOMContentLoaded", function () {
+  const statusDiv = document.getElementById("status");
+  const usuarioLogado = statusDiv.dataset.usuarioLogado === "true";
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const statusDiv = document.getElementById("status");
-    const usuarioLogado = statusDiv.dataset.usuarioLogado === "true";
-
-    const form = document.getElementById("form-pedido");
-    form.addEventListener("submit", function (event) {
-      if (!usuarioLogado) {
-        event.preventDefault(); // 🚫 Bloqueia envio do formulário
-        alert("Você precisa estar logado para finalizar o pedido.");
-      }
-    });
+  const form = document.getElementById("form-pedido");
+  form.addEventListener("submit", function (event) {
+    if (!usuarioLogado) {
+      event.preventDefault();
+                  Toastify({
+            text: "⚠️ Você precisa estar logado para finalizar o pedido!!!!!!",
+            duration: 4000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            style: {
+              background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+              color: "#000",
+              fontWeight: "bold",
+            },
+          }).showToast();
+          return;
+      // document.getElementById("aviso-login").style.display = "block";
+    }
   });
 
+  Finish.addEventListener("click", function () {
+    if (!usuarioLogado) {
+      document.getElementById("aviso-login").style.display = "block";
+      return; // ⛔ Bloqueia execução do resto da função
+    }
 
-// Lógica principal de finalização
-Finish.addEventListener("click", function () {
-  const isOpen = verificarOpen();
-  if (!isOpen) {
-    Toastify({
-      text: "Desculpe, a pizzaria está fechada!",
-      duration: 4000,
-      close: true,
-      gravity: "top",
-      position: "left",
-      stopOnFocus: true,
-      style: {
-        background: "linear-gradient(to right,rgba(255, 0, 0, 0.13),rgb(255, 0, 0))"
-      },
-    }).showToast();
-    return;
-  }
+    const isOpen = verificarOpen();
+    if (!isOpen) {
+      Toastify({
+        text: "Desculpe, a pizzaria está fechada!",
+        duration: 4000,
+        close: true,
+        gravity: "top",
+        position: "left",
+        stopOnFocus: true,
+        style: {
+          background: "linear-gradient(to right,rgba(255, 0, 0, 0.13),rgb(255, 0, 0))"
+        },
+      }).showToast();
+      return;
+    }
 
-  if (listcar.length === 0) return;
+    if (listcar.length === 0) return;
 
-  if (addressnome.value === "") {
-    Addresswarninputnome.style.display = "block";
-    Addresswarninputnome.innerText = "Um nome, por favor!!!";
-    return;
-  } else if (addressnome.value.length <= 3) {
-    Addresswarninputnome.style.display = "block";
-    Addresswarninputnome.innerText = "Nome precisa ter mais de 3 caracteres!";
-    return;
-  } else {
-    Addresswarninputnome.style.display = "none";
-  }
+    if (addressnome.value === "") {
+      Addresswarninputnome.style.display = "block";
+      Addresswarninputnome.innerText = "Um nome, por favor!!!";
+      return;
+    } else if (addressnome.value.length <= 3) {
+      Addresswarninputnome.style.display = "block";
+      Addresswarninputnome.innerText = "Nome precisa ter mais de 3 caracteres!";
+      return;
+    } else {
+      Addresswarninputnome.style.display = "none";
+    }
 
-  if (Addressinput.value === "") {
-    Addresswarninput.style.display = "block";
-    Addresswarninput.innerText = "Endereço completo, por favor!!!";
-    return;
-  } else if (Addressinput.value.length <= 3) {
-    Addresswarninput.style.display = "block";
-    Addresswarninput.innerText = "O endereço precisa ter no mínimo 3 caracteres";
-    return;
-  } else {
-    Addresswarninput.style.display = "none";
-  }
+    if (Addressinput.value === "") {
+      Addresswarninput.style.display = "block";
+      Addresswarninput.innerText = "Endereço completo, por favor!!!";
+      return;
+    } else if (Addressinput.value.length <= 3) {
+      Addresswarninput.style.display = "block";
+      Addresswarninput.innerText = "O endereço precisa ter no mínimo 3 caracteres";
+      return;
+    } else {
+      Addresswarninput.style.display = "none";
+    }
 
-  if (addressphone.value === "") {
-    Addresswarninputphone.style.display = "block";
-    Addresswarninputphone.innerText = "Número para contato, por favor!";
-    return;
-  } else if (addressphone.value.length !== 11) {
-    Addresswarninputphone.style.display = "block";
-    Addresswarninputphone.innerText = "Número inválido. Ex.: 31999990000";
-    return;
-  } else {
-    Addresswarninputphone.style.display = "none";
-  }
+    if (addressphone.value === "") {
+      Addresswarninputphone.style.display = "block";
+      Addresswarninputphone.innerText = "Número para contato, por favor!";
+      return;
+    } else if (addressphone.value.length !== 11) {
+      Addresswarninputphone.style.display = "block";
+      Addresswarninputphone.innerText = "Número inválido. Ex.: 31999990000";
+      return;
+    } else {
+      Addresswarninputphone.style.display = "none";
+    }
 
-  const listcaritens = listcar.map((item) => {
-    return `${item.name}, Quantidade:(${item.quantity}), Preço R$:(${item.price}) |***|`;
-  }).join("");
+    const listcaritens = listcar.map((item) => {
+      return `${item.name}, Quantidade:(${item.quantity}), Preço R$:(${item.price}) |***|`;
+    }).join("");
 
-  const mensagem = encodeURIComponent(listcaritens);
-  const celular = "31994174975";
+    const mensagem = encodeURIComponent(listcaritens);
+    const celular = "31994174975";
 
-  window.open(
-    `https://wa.me/${celular}?text=${mensagem}, ${Valortotal.textContent},// Nome: ${addressnome.value},// Endereço: ${Addressinput.value},// Celular: ${addressphone.value}`,
-    "_blank"
-  );
+    window.open(
+      `https://wa.me/${celular}?text=${mensagem}, ${Valortotal.textContent},// Nome: ${addressnome.value},// Endereço: ${Addressinput.value},// Celular: ${addressphone.value}`,
+      "_blank"
+    );
 
-  listcar.length = 0;
-  updatecarrinho();
+    listcar.length = 0;
+    updatecarrinho();
+  });
 });
+
+
+
+
+
+
+
+
+
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   const statusDiv = document.getElementById("status");
+//   const usuarioLogado = statusDiv.dataset.usuarioLogado === "true";
+
+//   const form = document.getElementById("form-pedido");
+//   form.addEventListener("submit", function (event) {
+//     if (!usuarioLogado) {
+//       event.preventDefault(); // 🚫 Bloqueia envio do formulário
+//       alert("Você precisa estar logado para finalizar o pedido.");
+//     }else{
+      
+//     }
+
+// // Lógica principal de finalização
+// Finish.addEventListener("click", function () {
+//   const isOpen = verificarOpen();
+//   if (!isOpen) {
+//     Toastify({
+//       text: "Desculpe, a pizzaria está fechada!",
+//       duration: 4000,
+//       close: true,
+//       gravity: "top",
+//       position: "left",
+//       stopOnFocus: true,
+//       style: {
+//         background: "linear-gradient(to right,rgba(255, 0, 0, 0.13),rgb(255, 0, 0))"
+//       },
+//     }).showToast();
+//     return;
+//   }
+
+//   if (listcar.length === 0) return;
+
+//   if (addressnome.value === "") {
+//     Addresswarninputnome.style.display = "block";
+//     Addresswarninputnome.innerText = "Um nome, por favor!!!";
+//     return;
+//   } else if (addressnome.value.length <= 3) {
+//     Addresswarninputnome.style.display = "block";
+//     Addresswarninputnome.innerText = "Nome precisa ter mais de 3 caracteres!";
+//     return;
+//   } else {
+//     Addresswarninputnome.style.display = "none";
+//   }
+
+//   if (Addressinput.value === "") {
+//     Addresswarninput.style.display = "block";
+//     Addresswarninput.innerText = "Endereço completo, por favor!!!";
+//     return;
+//   } else if (Addressinput.value.length <= 3) {
+//     Addresswarninput.style.display = "block";
+//     Addresswarninput.innerText = "O endereço precisa ter no mínimo 3 caracteres";
+//     return;
+//   } else {
+//     Addresswarninput.style.display = "none";
+//   }
+
+//   if (addressphone.value === "") {
+//     Addresswarninputphone.style.display = "block";
+//     Addresswarninputphone.innerText = "Número para contato, por favor!";
+//     return;
+//   } else if (addressphone.value.length !== 11) {
+//     Addresswarninputphone.style.display = "block";
+//     Addresswarninputphone.innerText = "Número inválido. Ex.: 31999990000";
+//     return;
+//   } else {
+//     Addresswarninputphone.style.display = "none";
+//   }
+
+//   const listcaritens = listcar.map((item) => {
+//     return `${item.name}, Quantidade:(${item.quantity}), Preço R$:(${item.price}) |***|`;
+//   }).join("");
+
+//   const mensagem = encodeURIComponent(listcaritens);
+//   const celular = "31994174975";
+
+//   window.open(
+//     `https://wa.me/${celular}?text=${mensagem}, ${Valortotal.textContent},// Nome: ${addressnome.value},// Endereço: ${Addressinput.value},// Celular: ${addressphone.value}`,
+//     "_blank"
+//   );
+
+//   listcar.length = 0;
+//   updatecarrinho();
+// });
+//     });
+//   });
+
 
 // Botão "Pagar Pedido" com integração ao Flask
 const botaoPagamento = document.getElementById("pagarPedido");
