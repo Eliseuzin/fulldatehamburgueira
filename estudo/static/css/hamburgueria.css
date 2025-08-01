@@ -228,10 +228,10 @@ footer > button {
   background-color: rgba(24, 104, 24, 0.616);
   color: #ffffff99;
 }
-#endpedido {
+#statuss {
   display: flex;
   justify-content: space-between;
-}
+} 
 
 #addresss {
   padding: 7px;
