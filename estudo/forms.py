@@ -8,6 +8,16 @@ from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 from estudo import db, bcrypt
 from estudo.models import User,Store
 
+#recuperaçao de senha
+# from flask_wtf import FlaskForm
+# from wtforms import StringField, SubmitField
+# from wtforms.validators import DataRequired, Email
+
+#redefinir senha
+# from flask_wtf import FlaskForm
+# from wtforms import PasswordField, SubmitField
+# from wtforms.validators import DataRequired, EqualTo
+
 class UserForm(FlaskForm):
     nome= StringField('Nome', validators=[DataRequired()])
     sobrenome=StringField('Sobrenome', validators=[DataRequired()])
@@ -62,3 +72,19 @@ class LoginForm(FlaskForm):
              return
         if not bcrypt.check_password_hash(user.senha,senha.data.encode('utf-8')):
             raise ValidationError('Senha incorreta, por favor, verifique a senha digitada!')
+        
+
+
+class PedidoRecuperacaoForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Enviar link de recuperação')
+
+
+
+class RedefinirSenhaForm(FlaskForm):
+    senha = PasswordField('Nova senha', validators=[DataRequired()])
+    confirmar_senha = PasswordField('Confirmar senha', validators=[
+        DataRequired(),
+        EqualTo('senha', message='As senhas devem ser iguais.')
+    ])
+    submit = SubmitField('Redefinir senha')
