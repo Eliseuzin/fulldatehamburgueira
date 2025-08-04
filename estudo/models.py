@@ -27,6 +27,24 @@ class Store(db.Model,UserMixin):
     endereço=db.Column(db.String, nullable=True)
  #fim do controle de login loja
 
+#inicio de salvar itens do carrinho
+class Carrinho(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    itens = db.relationship('ItemCarrinho', backref='carrinho', lazy=True)
+
+class ItemCarrinho(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    carrinho_id = db.Column(db.Integer, db.ForeignKey('carrinho.id'))
+    nome_produto = db.Column(db.String(100))
+    preco = db.Column(db.Float)
+    quantidade = db.Column(db.Integer)
+
+#fim de salvar itens do carrinho
+
+
+
+
 #comando para criar o banco de dados
 #flask db init
 #é necessário apenas um banco de dados por projeto.
