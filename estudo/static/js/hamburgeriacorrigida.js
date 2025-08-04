@@ -48,7 +48,6 @@ Menugeral.addEventListener("click", (event) => {
     addinmycar(name, price);
   }
 });
-
 function addinmycar(name, price) {
   const checklistcar = listcar.find(item => item.name === name);
   if (checklistcar) {
@@ -56,9 +55,52 @@ function addinmycar(name, price) {
   } else {
     listcar.push({ name, price, quantity: 1 });
   }
+
   updatecarrinho();
   subbottom.style.display = "block";
+
+  // Envia para o backend Flask
+  fetch('/adicionar-carrinho', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      nome_produto: name,
+      preco: price,
+      quantidade: 1 // sempre adicionando 1 por clique
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data.mensagem); // opcional
+  })
+  .catch(error => {
+    console.error('Erro ao enviar item para o backend:', error);
+  });
 }
+
+
+fetch('/meu-carrinho')
+  .then(response => {
+    if (response.ok) return response.json();
+    else throw new Error('Usuário não logado ou erro ao carregar');
+  })
+  .then(data => {
+    if (Array.isArray(data)) {
+      listcar = data; // <- substitui o carrinho local
+      updatecarrinho();
+      subbottom.style.display = "block";
+    }
+  })
+  .catch(err => {
+    console.log('Carrinho não carregado:', err.message);
+  });
+
+
+
+
+
 
 function updatecarrinho() {
   submeucarrinho.innerHTML = "";
