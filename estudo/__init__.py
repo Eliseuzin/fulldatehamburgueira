@@ -12,11 +12,12 @@ from dotenv import load_dotenv
 # from flask_login import LoginManager
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
+#verificaçao de email
+from flask_mail import Mail
 
 # responsavel por busca os valores
 import os
 load_dotenv('.env')
-
 
 # ✅ Causa prováveis de erros:
 # O problema não é no seu projeto, nem no código, mas sim porque o Python que está rodando o script não é o mesmo Python que tem o Flask-Login instalado.
@@ -35,9 +36,27 @@ load_dotenv('.env')
 
 # .\venv\Scripts\pip.exe install flask-bcrypt
 
-
 #instartar nosso aplicativo
 app=Flask(__name__)
+
+# Configurações do app (antes de criar mail, db, etc)
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['SECRET_KEY'] = 'sua_chave_secreta_aqui'
+
+# Agora inicialize as extensões
+mail = Mail(app)
+# db = SQLAlchemy(app)
+# migrate = Migrate(app, db)
+# login_manager = LoginManager(app)
+# bcrypt = Bcrypt(app)
 
 #configurar o banco de dados
 #quando criamos o banco de dados, ele chamará database.db
@@ -54,7 +73,6 @@ migrate=Migrate(app, db)
 #flask db init
 #é necessário apenas um banco de dados por projeto.
 
-
 #inicio do controle de login
 from estudo.models import User
 
@@ -65,7 +83,6 @@ login_manager.login_view='login'
 
 with app.app_context():
     db.create_all()
-
 
 # significa que você está usando o Flask-Login, mas não definiu a função obrigatória user_loader — que é necessária para o login funcionar corretamente.
 @login_manager.user_loader
