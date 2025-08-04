@@ -1,4 +1,5 @@
 from estudo import app
+from estudo.utils import gerar_token, verificar_token, enviar_email
 #rodar o projeto, apenas quem estiver chamando main
 if __name__=="__main__":
   #sempre que acontecer uma mudança ele estará iniciando novamente
