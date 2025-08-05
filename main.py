@@ -50,3 +50,12 @@ if __name__=="__main__":
 # Quando terminar, digite:
 # exit()
 
+
+# from estudo import app, db
+# from estudo.models import User
+
+# with app.app_context():
+#     total = User.query.delete()
+#     db.session.commit()
+#     print(f"{total} usuários apagados.")
+
