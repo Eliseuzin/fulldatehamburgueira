@@ -8,6 +8,13 @@ from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 from estudo import db, bcrypt
 from estudo.models import User,Store
 
+from werkzeug.security import check_password_hash,generate_password_hash
+# Escolha um único sistema de hash no seu projeto. 
+# Se você está usando werkzeug.security.generate_password_hash()
+#  para criar os hashes, use sempre check_password_hash() para verificar.
+# Você usou generate_password_hash(..., method='scrypt') (do werkzeug) para salvar a senha.
+# Mas tentou verificar com bcrypt.check_password_hash(...), o que causou:
+
 #recuperaçao de senha
 # from flask_wtf import FlaskForm
 # from wtforms import StringField, SubmitField
@@ -31,14 +38,18 @@ class UserForm(FlaskForm):
 # Passar .encode('utf-8') transforma isso em b'minhasenha123'
 # Flask-Bcrypt não aceita bytes nesse método, e isso pode
 #  resultar em hashs inválidos (como o erro Invalid salt)
+# Obter a senha do formulário	self.senha.data
+# Gerar o hash corretamente	bcrypt.generate_password_hash(self.senha.data.encode('utf-8'))
+# Salvar no banco	... .decode('utf-8') para virar str e ser compatível com o banco
+
 
     def save(self):
-        senha=bcrypt.generate_password_hash(self.senha.data)
+        senha_hash=generate_password_hash(self.senha.data).decode("utf-8")
         user=User(
             nome=self.nome.data,
             sobrenome=self.sobrenome.data,
             email=self.email.data,
-            senha=senha
+            senha=senha_hash
         )
         db.session.add(user)
         db.session.commit()
@@ -76,10 +87,9 @@ class LoginForm(FlaskForm):
         if user is None:
              #  evita validação dupla caso o email falhar
              return
-        if not bcrypt.check_password_hash(user.senha,senha.data):
+        if not check_password_hash(user.senha,senha.data):
             raise ValidationError('Senha incorreta, por favor, verifique a senha digitada!')
         
-
 
 class PedidoRecuperacaoForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
