@@ -41,3 +41,12 @@ if __name__=="__main__":
 
 #  Isso vai automaticamente envolver o conteúdo selecionado dentro de uma <div>.
 # Emmet: Wrap with Abbreviation
+
+
+# O shell interativo do Python é um ambiente onde você pode digitar
+#  e executar comandos Python linha por linha. Ele aparece quando 
+# você digita python (ou python3, em alguns casos) no terminal.
+
+# Quando terminar, digite:
+# exit()
+
