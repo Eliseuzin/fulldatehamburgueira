@@ -25,9 +25,15 @@ class UserForm(FlaskForm):
     senha=PasswordField('Senha', validators=[DataRequired()])
     confirmarsenha=PasswordField('Confirmar senha', validators=[DataRequired(), EqualTo('senha')])
     btnSubmit=SubmitField('Cadastrar usuário')
+# flask_bcrypt faz a conversão internamente, então se você usar
+#  .encode(), ele vai quebrar com erros como o ValueError: Invalid salt.
+# self.senha.data já é uma string como "minhasenha123"
+# Passar .encode('utf-8') transforma isso em b'minhasenha123'
+# Flask-Bcrypt não aceita bytes nesse método, e isso pode
+#  resultar em hashs inválidos (como o erro Invalid salt)
 
     def save(self):
-        senha=bcrypt.generate_password_hash(self.senha.data.encode('utf-8'))
+        senha=bcrypt.generate_password_hash(self.senha.data)
         user=User(
             nome=self.nome.data,
             sobrenome=self.sobrenome.data,
@@ -70,7 +76,7 @@ class LoginForm(FlaskForm):
         if user is None:
              #  evita validação dupla caso o email falhar
              return
-        if not bcrypt.check_password_hash(user.senha,senha.data.encode('utf-8')):
+        if not bcrypt.check_password_hash(user.senha,senha.data):
             raise ValidationError('Senha incorreta, por favor, verifique a senha digitada!')
         
 
