@@ -77,7 +77,7 @@ migrate=Migrate(app, db)
 from estudo.models import User
 
 login_manager=LoginManager(app)
-bcrypt=Bcrypt(app)
+# bcrypt=Bcrypt(app)
 # controle de login
 login_manager.login_view='login'
 
