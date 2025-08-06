@@ -5,7 +5,7 @@ from wtforms import StringField, PasswordField, SubmitField,IntegerField, TextAr
 # EqualTo verifica se um campo é == ao outro
 # para a validaçao do email precisamos instalar pip install email_validator
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
-from estudo import db, bcrypt
+from estudo import db
 from estudo.models import User,Store
 
 from werkzeug.security import check_password_hash,generate_password_hash
@@ -25,12 +25,13 @@ from werkzeug.security import check_password_hash,generate_password_hash
 # from wtforms import PasswordField, SubmitField
 # from wtforms.validators import DataRequired, EqualTo
 
+
 class UserForm(FlaskForm):
     nome= StringField('Nome', validators=[DataRequired()])
     sobrenome=StringField('Sobrenome', validators=[DataRequired()])
     email=StringField('Email', validators=[DataRequired()])
     senha=PasswordField('Senha', validators=[DataRequired()])
-    confirmarsenha=PasswordField('Confirmar senha', validators=[DataRequired(), EqualTo('senha')])
+    confirmarsenha=PasswordField('Confirmar senha', validators=[DataRequired(message='Campo obrigatorio!'), EqualTo('senha', message='As senhas devem ser iguais!')])
     btnSubmit=SubmitField('Cadastrar usuário')
 # flask_bcrypt faz a conversão internamente, então se você usar
 #  .encode(), ele vai quebrar com erros como o ValueError: Invalid salt.
@@ -44,7 +45,7 @@ class UserForm(FlaskForm):
 
 
     def save(self):
-        senha_hash=generate_password_hash(self.senha.data).decode("utf-8")
+        senha_hash=generate_password_hash(self.senha.data)
         user=User(
             nome=self.nome.data,
             sobrenome=self.sobrenome.data,
@@ -97,6 +98,7 @@ class PedidoRecuperacaoForm(FlaskForm):
 
 
 
+
 class RedefinirSenhaForm(FlaskForm):
     senha = PasswordField('Nova senha', validators=[DataRequired()])
     confirmar_senha = PasswordField('Confirmar senha', validators=[
@@ -104,3 +106,14 @@ class RedefinirSenhaForm(FlaskForm):
         EqualTo('senha', message='As senhas devem ser iguais.')
     ])
     submit = SubmitField('Redefinir senha')
+
+#atualizar cadastro
+class AtualizarUsuarioForm(FlaskForm):
+    nome = StringField('Nome', validators=[DataRequired()])
+    sobrenome = StringField('Sobrenome', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    senha = PasswordField('Nova senha (opcional)')
+    confirmar_senha = PasswordField('Confirmar nova senha', validators=[
+        EqualTo('senha', message='As senhas devem ser iguais.')
+    ])
+    submit = SubmitField('Atualizar')
