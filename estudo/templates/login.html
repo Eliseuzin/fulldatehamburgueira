@@ -5,7 +5,7 @@
     <!-- aqyu, recebera as mensagens de error -->
      {% with messages= get_flashed_messages(with_categories=True)%}
      {% if messages%}
-     {%for category, message in messagens%}
+     {%for category, message in messages%}
      <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
         {{message}}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -15,7 +15,7 @@
      {%endwith%}
  <!-- para saber se tem usuário logado ou nao -->
   {% if current_user.is_authenticated %}
-        <span class="btn btn-primary">{{current_user.nome}}{{currente_user.sobrenome}}</span>
+        <span class="btn btn-primary">{{current_user.nome}}{{current_user.sobrenome}}</span>
         <a href="{{url_for('logout')}}" class="btn btn-danger">Sair</a>
         {%else%}
          <form action="" method="post" class="row mt-4">
