@@ -19,6 +19,8 @@ from estudo.forms import RedefinirSenhaForm
 from estudo.utils import verificar_token
 from werkzeug.security import generate_password_hash
 
+from estudo.forms import AtualizarUsuarioForm  # ou ajuste o nome conforme necessário
+
 
 
 from estudo.forms import UserForm, StoreForm
@@ -188,11 +190,12 @@ def recuperar_senha():
 
             enviar_email(user.email, 'Redefinir sua senha', corpo_email)
             flash('Enviamos um link para redefinir sua senha no seu email.', 'info')
+            return redirect(url_for('login'))
+
         else:
             flash('Email não encontrado.', 'warning')
-        return redirect(url_for('login'))
+        # return redirect(url_for('login'))
     return render_template('recuperar_senha.html', form=form)
-
 
 
 
@@ -218,3 +221,26 @@ def redefinir_senha(token):
 
     return render_template('redefinir_senha.html', form=form)
 
+
+#atualizar cadastro
+
+@app.route('/atualizar_cadastro', methods=['GET', 'POST'])
+@login_required
+def atualizar_cadastro():
+    form = AtualizarUsuarioForm(obj=current_user)  # Pré-preenche os dados do usuário
+
+    if form.validate_on_submit():
+        # Atualizar os dados
+        current_user.nome = form.nome.data
+        current_user.sobrenome = form.sobrenome.data
+        current_user.email = form.email.data
+
+        # Atualiza a senha somente se o campo não estiver vazio
+        if form.senha.data:
+            current_user.senha = generate_password_hash(form.senha.data)
+
+        db.session.commit()
+        flash('Seus dados foram atualizados com sucesso!', 'success')
+        return redirect(url_for('homepage'))
+
+    return render_template('atualizar_cadastro.html', form=form)
