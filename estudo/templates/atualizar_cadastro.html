@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block base %}
+{% include 'back_inicio_cadastro.html' %}
 <div class="container mt-5" style="max-width: 500px;">
   <h3>Atualizar Cadastro</h3>
   <form method="POST">
@@ -31,6 +32,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary">{{ form.submit.label.text }}</button>
+
   </form>
 </div>
 {% endblock %}
