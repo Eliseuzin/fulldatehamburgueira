@@ -29,6 +29,9 @@ from werkzeug.security import check_password_hash,generate_password_hash
 class UserForm(FlaskForm):
     nome= StringField('Nome', validators=[DataRequired()])
     sobrenome=StringField('Sobrenome', validators=[DataRequired()])
+    endereco=StringField('Endereço', validators=[DataRequired()])
+    complemento=StringField('Complemento(cs/app)', validators=[DataRequired()])
+    celular=IntegerField('Celular', validators=[DataRequired()])
     email=StringField('Email', validators=[DataRequired()])
     senha=PasswordField('Senha', validators=[DataRequired()])
     confirmarsenha=PasswordField('Confirmar senha', validators=[DataRequired(message='Campo obrigatorio!'), EqualTo('senha', message='As senhas devem ser iguais!')])
@@ -63,6 +66,7 @@ class StoreForm(FlaskForm):
     sobrenome=StringField('Sobrenome', validators=[DataRequired()])
     email=StringField('Email', validators=[DataRequired()])
     senha=PasswordField('Senha', validators=[DataRequired()])
+    celularp=IntegerField('Celular pessoal',validators=[DataRequired()])
     confirmarsenha=PasswordField('Confirmar senha', validators=[DataRequired()])
     cnpj=IntegerField('CNPJ da loja', validators=[DataRequired()])
     nomedaloja=StringField('Nome da loja', validators=[DataRequired()])
