@@ -9,6 +9,9 @@ class User(db.Model,UserMixin):
     #nullable=True, que dizer que o campo não pode ficar vazio
     id=db.Column(db.Integer,primary_key=True)
     nome=db.Column(db.String, nullable=True)
+    endereco=db.Column(db.String, nullable=True)
+    complemento=db.Column(db.String, nullable=True)
+    celular=db.Column(db.Integer, nullable=True)
     sobrenome=db.Column(db.String, nullable=True)
     email=db.Column(db.String, nullable=True)
     senha=db.Column(db.String, nullable=True)
@@ -20,6 +23,7 @@ class Store(db.Model,UserMixin):
     nome=db.Column(db.String, nullable=True)
     sobrenome=db.Column(db.String, nullable=True)
     email=db.Column(db.String, nullable=True)
+    celularp=db.Column(db.Integer, nullable=True)
     senha=db.Column(db.String, nullable=True)
     cnpj=db.Column(db.Integer, nullable=True)
     nomedaloja=db.Column(db.String, nullable=True)
