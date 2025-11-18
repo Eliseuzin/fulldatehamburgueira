@@ -14,7 +14,7 @@ if __name__=="__main__":
 # python -m venv venv
 
 #Caso de erro indica que você está tentando executar o comando de ativação do ambiente virtual no PowerShell, mas está usando a sintaxe de outro terminal (cmd).
-
+ 
 #PARA COMANDO CMD
 
 #python -m venv venv para criar o ambiente virtual
