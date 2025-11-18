@@ -27,7 +27,7 @@ class Store(db.Model,UserMixin):
     senha=db.Column(db.String, nullable=True)
     cnpj=db.Column(db.Integer, nullable=True)
     nomedaloja=db.Column(db.String, nullable=True)
-    telefone=db.Column(db.Integer, nullable=True)
+    nextreferencia=db.Column(db.String, nullable=True)
     endereço=db.Column(db.String, nullable=True)
  #fim do controle de login loja
 
