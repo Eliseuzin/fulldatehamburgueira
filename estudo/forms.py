@@ -62,17 +62,37 @@ class UserForm(FlaskForm):
 
 
 class StoreForm(FlaskForm):
-    nome=StringField('Nome', validators=[DataRequired()])
-    sobrenome=StringField('Sobrenome', validators=[DataRequired()])
-    email=StringField('Email', validators=[DataRequired()])
-    senha=PasswordField('Senha', validators=[DataRequired()])
-    celularp=IntegerField('Celular pessoal',validators=[DataRequired()])
-    confirmarsenha=PasswordField('Confirmar senha', validators=[DataRequired()])
-    cnpj=IntegerField('CNPJ da loja', validators=[DataRequired()])
-    nomedaloja=StringField('Nome da loja', validators=[DataRequired()])
-    telefone=IntegerField('Telefone da loja', validators=[DataRequired()])
-    endereço=StringField('Endereço da loja', validators=[DataRequired()])
-    btnSubmit=SubmitField('Cadastrar loja')
+    nome=StringField('Nome(pessoal):', validators=[DataRequired()])
+    sobrenome=StringField('Sobrenome(pessoal):', validators=[DataRequired()])
+    email=StringField('Email da loja:', validators=[DataRequired()])
+    senha=PasswordField('Senha:', validators=[DataRequired()])
+    celularp=IntegerField('Celular(pessoal):',validators=[DataRequired()])
+    confirmarsenha=PasswordField('Confirmar senha:', validators=[DataRequired()])
+    cnpj=IntegerField('CNPJ da loja:', validators=[DataRequired()])
+    nomedaloja=StringField('Nome da loja:', validators=[DataRequired()])
+    nextreferencia=StringField('Referência mais próxima da loja:', validators=[DataRequired()])
+    endereço=StringField('Endereço da loja:', validators=[DataRequired()])
+    btnSubmit=SubmitField('Cadastrar loja:')
+    
+    #saving database
+    def save(self):
+        senha_hash=generate_password_hash(self.senha.data)
+        store=Store(
+            nome=self.nome.data,
+            sobrenone=self.sobrenome.data,
+            email=self.email.data,
+            senha=senha_hash,
+            celular=self.celularp.data,
+            cnpj=self.cnpj.data,
+            nomedaloja=self.nomedaloja.data,
+            nextreferencia=self.nextreferencia.data,
+            endereço=self.endereço.data
+        )
+        db.session.add(store)
+        db.session.commit()
+        return store
+    
+
 
 class LoginForm(FlaskForm):
     email=StringField('E-mail', validators=[DataRequired(),Email()])
