@@ -28,7 +28,7 @@ class Store(db.Model,UserMixin):
     cnpj=db.Column(db.Integer, nullable=True)
     nomedaloja=db.Column(db.String, nullable=True)
     nextreferencia=db.Column(db.String, nullable=True)
-    endereço=db.Column(db.String, nullable=True)
+    endereco=db.Column(db.String, nullable=True)
  #fim do controle de login loja
 
 #inicio de salvar itens do carrinho
