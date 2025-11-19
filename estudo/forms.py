@@ -53,7 +53,11 @@ class UserForm(FlaskForm):
             nome=self.nome.data,
             sobrenome=self.sobrenome.data,
             email=self.email.data,
-            senha=senha_hash
+            senha=senha_hash,
+            endereco=self.endereco.data,
+            complemento=self.complemento.data,
+            celular=self.celular.data,
+
         )
         db.session.add(user)
         db.session.commit()
@@ -71,7 +75,7 @@ class StoreForm(FlaskForm):
     cnpj=IntegerField('CNPJ da loja:', validators=[DataRequired()])
     nomedaloja=StringField('Nome da loja:', validators=[DataRequired()])
     nextreferencia=StringField('Referência mais próxima da loja:', validators=[DataRequired()])
-    endereço=StringField('Endereço da loja:', validators=[DataRequired()])
+    endereco=StringField('Endereço da loja:', validators=[DataRequired()])
     btnSubmit=SubmitField('Cadastrar loja:')
     
     #saving database
@@ -79,14 +83,14 @@ class StoreForm(FlaskForm):
         senha_hash=generate_password_hash(self.senha.data)
         store=Store(
             nome=self.nome.data,
-            sobrenone=self.sobrenome.data,
+            sobrenome=self.sobrenome.data,
             email=self.email.data,
             senha=senha_hash,
-            celular=self.celularp.data,
+            celularp=self.celularp.data,
             cnpj=self.cnpj.data,
             nomedaloja=self.nomedaloja.data,
             nextreferencia=self.nextreferencia.data,
-            endereço=self.endereço.data
+            endereco=self.endereco.data
         )
         db.session.add(store)
         db.session.commit()
