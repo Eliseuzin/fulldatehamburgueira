@@ -3,7 +3,7 @@ from estudo import app,db
 from flask import render_template, url_for 
 from flask import redirect,flash
 from flask_login import login_user, logout_user, current_user, login_required
-from estudo.forms import LoginForm
+from estudo.forms import LoginForm, LoginStore
 from flask import session, request, jsonify
 from estudo.models import ItemCarrinho, Carrinho
 
@@ -12,7 +12,7 @@ from estudo.models import ItemCarrinho, Carrinho
 # from flask import render_template, request, flash, redirect, url_for
 from estudo.forms import PedidoRecuperacaoForm
 from estudo.utils import gerar_token,enviar_email
-from estudo.models import User  # seu modelo de usuário
+from estudo.models import User, Store  # seu modelo de usuário
 
 # E Página para redefinir senha
 from estudo.forms import RedefinirSenhaForm
@@ -91,6 +91,30 @@ def login():
         return redirect(url_for('homepage'))
 
     return render_template('login.html', form=form)
+
+
+#login para lojistas
+@app.route('/login_store/', methods=["GET", "POST"])
+def login_store():
+    form = LoginStore()
+
+    if form.validate_on_submit():
+        login_user(form.store, remember=True)
+        flash("Login da loja realizado com sucesso!", "success")
+        return redirect(url_for("dashboard_store"))
+
+    return render_template("login_store.html", form=form)
+
+
+@app.route("/dashboard_store")
+@login_required
+def dashboard_store():
+    # Garante que somente lojas podem acessar
+    if not hasattr(current_user, "cnpj"):
+        flash("Acesso permitido somente para lojas!", "danger")
+        return redirect(url_for("homepage"))
+
+    return render_template("dashboard_store.html", loja=current_user)
 
 
 @app.route('/meu-carrinho', methods=['GET'])
