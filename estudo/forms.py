@@ -97,11 +97,13 @@ class StoreForm(FlaskForm):
         return store
     
 
+#há necessidade de criar duas class, caso contrário a segunda subescreve a primeira
 
 class LoginForm(FlaskForm):
     email=StringField('E-mail', validators=[DataRequired(),Email()])
     senha=PasswordField('Senha', validators=[DataRequired()])
     btnSubmit=SubmitField('Entrar')
+    #varificação com entrada no banco user
 
     def validate_email(self,email):
         user=User.query.filter_by(email=email.data).first()
@@ -117,6 +119,28 @@ class LoginForm(FlaskForm):
              #  evita validação dupla caso o email falhar
              return
         if not check_password_hash(user.senha,senha.data):
+            raise ValidationError('Senha incorreta, por favor, verifique a senha digitada!')
+        
+class LoginStore(FlaskForm):
+    email=StringField('E-mail da loja', validators=[DataRequired(),Email()])
+    senha=PasswordField('Senha', validators=[DataRequired()])
+    btnSubmit=SubmitField('Entrar')
+        #varificação com entrada no banco Store
+
+    def validate_email(self,email):
+        store=Store.query.filter_by(email=email.data).first()
+        if not store:
+            raise ValidationError('E-mail não encontrado, por favor, verifique o e-mail digitado!')
+        #armazenar o usuário encontrado
+        self.store=store
+
+    def validate_senha(self,senha):
+        #só valida se o email for valido e usuário existir
+        store=getattr(self,'store', None)
+        if store is None:
+            #evita validação dupla caso email falhar
+            return
+        if not check_password_hash(store.senha,senha.data):
             raise ValidationError('Senha incorreta, por favor, verifique a senha digitada!')
         
 
