@@ -15,6 +15,11 @@ class User(db.Model,UserMixin):
     sobrenome=db.Column(db.String, nullable=True)
     email=db.Column(db.String, nullable=True)
     senha=db.Column(db.String, nullable=True)
+
+# evita da erro ao logo, pois o flask busca o id e sempre ira no pri meiro que encontar
+    def get_id(self):
+        return f"user:{self.id}"
+    
  #fim do controle de login usuario
 
  #inicio do controle de login loja
@@ -29,6 +34,10 @@ class Store(db.Model,UserMixin):
     nomedaloja=db.Column(db.String, nullable=True)
     nextreferencia=db.Column(db.String, nullable=True)
     endereco=db.Column(db.String, nullable=True)
+    
+# evita da erro ao logo, pois o flask busca o id e sempre ira no pri meiro que encontar
+    def get_id(self):
+        return f"store:{self.id}"
  #fim do controle de login loja
 
 #inicio de salvar itens do carrinho
