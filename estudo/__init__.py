@@ -14,6 +14,8 @@ from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 #verificaçao de email
 from flask_mail import Mail
+from flask import session
+from flask_login import current_user
 
 # responsavel por busca os valores
 import os
@@ -74,7 +76,7 @@ migrate=Migrate(app, db)
 #é necessário apenas um banco de dados por projeto.
 
 #inicio do controle de login
-from estudo.models import User
+from estudo.models import User, Store
 
 login_manager=LoginManager(app)
 # bcrypt=Bcrypt(app)
@@ -84,14 +86,45 @@ login_manager.login_view='login'
 with app.app_context():
     db.create_all()
 
+# fazendo teste com o login de cliente e loja
 # significa que você está usando o Flask-Login, mas não definiu a função obrigatória user_loader — que é necessária para o login funcionar corretamente.
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(user_id)
+# @login_manager.user_loader
+# def load_user(user_id):
+#     return User.query.get(user_id)
 
 # está acontecendo porque você está tentando importar login_manager
 # de dentro do models.py, mas o login_manager só é criado no
 # __init__.py — e isso causa um "ciclo de importação" (circular import).
+
+@login_manager.user_loader
+def load_user(user_key):
+    # Se o cookie for antigo (ex: "1"), devolve None
+    if ":" not in user_key:
+        return None
+
+    tipo, user_id = user_key.split(":")
+
+    if tipo == "user":
+        return User.query.get(int(user_id))
+    elif tipo == "store":
+        return Store.query.get(int(user_id))
+    
+    return None
+
+# evitar da erros de O Jinja não aceita funções Python como hasattr.
+@app.context_processor
+def inject_user_type():
+    tipo = None
+
+    if current_user.is_authenticated:
+        # Verifica se o ID guardado começa com 'store:' ou 'user:'
+        user_cookie = session.get('_user_id', '')
+        if ':' in user_cookie:
+            tipo = user_cookie.split(':')[0]
+
+    return dict(tipo_usuario=tipo)
+
+
 
 # importa as rotas
 from estudo import routes 
