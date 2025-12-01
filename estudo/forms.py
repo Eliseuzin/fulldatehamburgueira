@@ -161,11 +161,14 @@ class RedefinirSenhaForm(FlaskForm):
 
 #atualizar cadastro
 class AtualizarUsuarioForm(FlaskForm):
-    nome = StringField('Nome', validators=[DataRequired()])
-    sobrenome = StringField('Sobrenome', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    senha = PasswordField('Nova senha (opcional)')
-    confirmar_senha = PasswordField('Confirmar nova senha', validators=[
+    nome = StringField('Nome::', validators=[DataRequired()])
+    sobrenome = StringField('Sobrenome:', validators=[DataRequired()])
+    email = StringField('Email:', validators=[DataRequired(), Email()])
+    endereco=StringField('Endereço:', validators=[DataRequired()])
+    complemento=StringField('Complemento:', validators=[DataRequired()])
+    celular=StringField('Celular:', validators=[DataRequired()])
+    senha = PasswordField('Nova senha: (opcional)')
+    confirmar_senha = PasswordField('Confirmar nova senha:', validators=[
         EqualTo('senha', message='As senhas devem ser iguais.')
     ])
     submit = SubmitField('Atualizar')
