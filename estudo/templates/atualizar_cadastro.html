@@ -3,30 +3,45 @@
 {% include 'back_inicio_cadastro.html' %}
 <div class="container mt-5" style="max-width: 500px;">
   <h3>Atualizar Cadastro</h3>
-  <form method="POST">
+  <form method="POST" class="row mt-4">
     {{ form.hidden_tag() }}
 
-    <div class="mb-3">
+    <div class="col-md-6 mb-4">
       {{ form.nome.label(class="form-label") }}
       {{ form.nome(class="form-control") }}
     </div>
 
-    <div class="mb-3">
+    <div class="col-md-6 mb-4">
       {{ form.sobrenome.label(class="form-label") }}
       {{ form.sobrenome(class="form-control") }}
     </div>
 
-    <div class="mb-3">
+    <div class="col-md-6 mb-4">
       {{ form.email.label(class="form-label") }}
       {{ form.email(class="form-control") }}
     </div>
 
-    <div class="mb-3">
+    <div class="col-md-6 mb-5">
+      {{form.endereco.label(class="form-label")}}
+      {{form.endereco(class="form-control")}}
+    </div>
+
+    <div class="col-md-6 mb-4">
+      {{form.complemento.label(class="form-label")}}
+      {{form.complemento(class="form-control")}}
+    </div>
+
+    <div class="col-md-6 mb-4">
+      {{form.celular.label(class="form-label")}}
+      {{form.celular(class="form-control")}}
+    </div>
+
+    <div class="col-md-6 mb-4">
       {{ form.senha.label(class="form-label") }}
       {{ form.senha(class="form-control", placeholder="Deixe em branco para não alterar") }}
     </div>
 
-    <div class="mb-3">
+    <div class="col-md-6 mb-4">
       {{ form.confirmar_senha.label(class="form-label") }}
       {{ form.confirmar_senha(class="form-control") }}
     </div>
