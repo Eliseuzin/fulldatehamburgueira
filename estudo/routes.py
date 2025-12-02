@@ -19,7 +19,7 @@ from estudo.forms import RedefinirSenhaForm
 from estudo.utils import verificar_token
 from werkzeug.security import generate_password_hash
 
-from estudo.forms import AtualizarUsuarioForm  # ou ajuste o nome conforme necessário
+from estudo.forms import AtualizarUsuarioForm, AtualizarLojistaForm  # ou ajuste o nome conforme necessário
 
 
 
@@ -257,9 +257,9 @@ def redefinir_senha(token):
 #atualizar cadastro
 
 @app.route('/atualizar_cadastro', methods=['GET', 'POST'])
-@login_required
+@login_required#server para impedir que alguém edite  os dados de outro usuário ou da loja sem está logado
 def atualizar_cadastro():
-    form = AtualizarUsuarioForm(obj=current_user)  # Pré-preenche os dados do usuário
+    form = AtualizarUsuarioForm(obj=current_user)#usado para preencher os dados do usuario
 
     if form.validate_on_submit():
         # Atualizar os dados
@@ -279,3 +279,30 @@ def atualizar_cadastro():
         return redirect(url_for('homepage'))
 
     return render_template('atualizar_cadastro.html', form=form)
+
+@app.route('/atualizar_cadastro_lojista/', methods=['GET', 'POST'])
+@login_required#server para impedir que alguém edite  os dados de outro usuário ou da loja sem está logado
+def atualizar_cadastro_lojista():
+    form=AtualizarLojistaForm(obj=current_user)#usado para preencher os dados do usuario
+
+    if form.validate_on_submit():
+        #atualizar os dados da loja
+        current_user.nome=form.nome.data
+        current_user.sobrenome=form.sobrenome.data
+        current_user.email=form.email.data
+        current_user.celularp=form.celularp.data
+        current_user.nomedaloja=form.nomedaloja.data
+        current_user.nextreferencia=form.nextreferencia.data
+        current_user.endereco=form.endereco.data
+
+        #atualizar as senhas somente se o campo não estiver vazio
+        if form.senha.data:
+            current_user.senha=generate_password_hash(form.senha.data)
+        db.session.commit()
+        flash('Seus dados foram atualizados com succeso!','success')
+        return redirect(url_for('dashboard_store'))
+    
+    return render_template('atualizar_cadastro_lojista.html', form=form)
+
+
+    
