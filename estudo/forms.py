@@ -159,7 +159,7 @@ class RedefinirSenhaForm(FlaskForm):
     ])
     submit = SubmitField('Redefinir senha')
 
-#atualizar cadastro
+#atualizar cadastro usuário
 class AtualizarUsuarioForm(FlaskForm):
     nome = StringField('Nome::', validators=[DataRequired()])
     sobrenome = StringField('Sobrenome:', validators=[DataRequired()])
@@ -172,3 +172,16 @@ class AtualizarUsuarioForm(FlaskForm):
         EqualTo('senha', message='As senhas devem ser iguais.')
     ])
     submit = SubmitField('Atualizar')
+
+#atualizar cadastro lojista
+class AtualizarLojistaForm(FlaskForm):
+    nome=StringField('Nome pessoal:',validators=[DataRequired()])
+    sobrenome=StringField('Sobrenome:', validators=[DataRequired()])
+    email=StringField('Email:', validators=[DataRequired()])
+    celularp=StringField('Celular pessoal:', validators=[DataRequired()])
+    nomedaloja=StringField('Nome da loja', validators=[DataRequired()])
+    nextreferencia=StringField('Referência próxima à loja:', validators=[DataRequired()])
+    endereco=StringField('Endereço da loja:', validators=[DataRequired()])
+    senha= PasswordField('Nova senha (opcional):')
+    confirmar_senha_lojista=PasswordField('Confimar nova senha:', validators=[EqualTo('senha',message='As senhas devem ser iguais')])
+    submit=SubmitField('Atualizar')
