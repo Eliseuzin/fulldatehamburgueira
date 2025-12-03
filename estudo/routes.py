@@ -293,6 +293,7 @@ def atualizar_cadastro_lojista():
         current_user.celularp=form.celularp.data
         current_user.nomedaloja=form.nomedaloja.data
         current_user.nextreferencia=form.nextreferencia.data
+        current_user.cnpj=form.cnpj.data
         current_user.endereco=form.endereco.data
 
         #atualizar as senhas somente se o campo não estiver vazio
