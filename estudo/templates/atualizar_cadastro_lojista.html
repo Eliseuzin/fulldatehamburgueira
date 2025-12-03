@@ -63,8 +63,16 @@
                 {% endfor %}
             </div>
 
+            <div class="col-md-6 mb-3">
+                {{form.cnpj.label(class="form-label")}}
+                {{form.cnpj(class="form-control", placeholder="Cnpj novo")}}
+                {%for error in form.cnpj.erros%}
+                <div class="text-danger">{{ error }}</div>
+                {%endfor%}
+            </div>
+
             <!-- Endereço da Loja -->
-            <div class="col-12 mb-3">
+            <div class="col-6 mb-3">
                 {{ form.endereco.label(class="form-label") }}
                 {{ form.endereco(class="form-control", placeholder="Endereço completo da loja") }}
                 {% for error in form.endereco.errors %}
