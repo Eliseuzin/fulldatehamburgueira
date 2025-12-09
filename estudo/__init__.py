@@ -75,6 +75,9 @@ migrate=Migrate(app, db)
 #flask db init
 #é necessário apenas um banco de dados por projeto.
 
+# pip install Flask-Mail
+
+
 #inicio do controle de login
 from estudo.models import User, Store
 
