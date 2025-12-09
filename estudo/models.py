@@ -55,6 +55,32 @@ class ItemCarrinho(db.Model):
 
 #fim de salvar itens do carrinho
 
+# criando gerenciamento do pedidos
+
+# from estudo import db
+
+
+# model para produtos crud
+
+class Produto(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(120), nullable=True)
+    descricao = db.Column(db.Text, nullable=True)
+    preco = db.Column(db.Float, nullable=True)
+    categoria = db.Column(db.String(80), nullable=True)
+    ativo = db.Column(db.Boolean, default=True)
+    imagem = db.Column(db.String(200), nullable=True)
+
+
+    # 👇 ESTE CAMPO É OBRIGATÓRIO PARA LIGAR PRODUTO À LOJA (usuário)
+    loja_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    # opcional: relacionamento
+    loja = db.relationship('User', backref='produtos')
+
+
+# fim do model para produtos crud
+
 
 
 
