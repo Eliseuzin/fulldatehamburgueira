@@ -306,4 +306,92 @@ def atualizar_cadastro_lojista():
     return render_template('atualizar_cadastro_lojista.html', form=form)
 
 
+# rotas para produtos CRUD
+
+# routes_produtos.py (por exemplo)
+
+# from flask import render_template, redirect, url_for, request, flash
+# from flask_login import login_required, current_user
+# from estudo import db
+from estudo.models import Produto
+from estudo.forms import ProdutoForm
+
+
+# ----------------------------
+# LISTAR PRODUTOS
+# ----------------------------
+@app.route('/produtos')
+@login_required
+def produtos_lista():
+    produtos = Produto.query.filter_by(loja_id=current_user.id).all()
+    return render_template('produtos_lista.html', produtos=produtos)
+
+
+
+# ----------------------------
+# CRIAR PRODUTO
+# ----------------------------
+@app.route('/produto/novo', methods=['GET', 'POST'])
+@login_required
+def produto_novo():
+    form = ProdutoForm()
+    
+    if form.validate_on_submit():
+        produto = Produto(
+            loja_id=current_user.id,
+            nome=form.nome.data,
+            descricao=form.descricao.data,
+            preco=form.preco.data,
+            categoria=form.categoria.data
+        )
+        db.session.add(produto)
+        db.session.commit()
+        flash("Produto criado com sucesso!", "success")
+        return redirect(url_for('produtos_lista'))
+    
+    return render_template('produto_form.html', form=form, titulo="Novo Produto")
+
+
+
+# ----------------------------
+# EDITAR PRODUTO
+# ----------------------------
+@app.route('/produto/<int:id>/editar', methods=['GET', 'POST'])
+@login_required
+def produto_editar(id):
+    produto = Produto.query.filter_by(id=id, loja_id=current_user.id).first_or_404()
+
+    form = ProdutoForm(obj=produto)
+
+    if form.validate_on_submit():
+        produto.nome = form.nome.data
+        produto.descricao = form.descricao.data
+        produto.preco = form.preco.data
+        produto.categoria = form.categoria.data
+
+        db.session.commit()
+        flash("Produto atualizado com sucesso!", "success")
+        return redirect(url_for('produtos_lista'))
+
+    return render_template('produto_form.html', form=form, titulo="Editar Produto")
+
+
+
+# ----------------------------
+# EXCLUIR PRODUTO
+# ----------------------------
+@app.route('/produto/<int:id>/excluir', methods=['POST'])
+@login_required
+def produto_excluir(id):
+    produto = Produto.query.filter_by(id=id, loja_id=current_user.id).first_or_404()
+
+    db.session.delete(produto)
+    db.session.commit()
+
+    flash("Produto removido com sucesso!", "success")
+    return redirect(url_for('produtos_lista'))
+
+
+# fim das rotas para produtos CRUD
+
     
