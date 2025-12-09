@@ -186,3 +186,20 @@ class AtualizarLojistaForm(FlaskForm):
     senha= PasswordField('Nova senha (opcional):')
     confirmar_senha=PasswordField('Confimar nova senha:', validators=[EqualTo('senha',message='As senhas devem ser iguais')])
     submit=SubmitField('Atualizar')
+
+# formulario de produtos para CRUD
+
+# from flask_wtf import FlaskForm
+# from wtforms import StringField, TextAreaField, SubmitField
+from wtforms import DecimalField, BooleanField
+# from wtforms.validators import DataRequired
+
+class ProdutoForm(FlaskForm):
+    nome = StringField('Nome do produto', validators=[DataRequired()])
+    descricao = TextAreaField('Descrição')
+    preco = DecimalField('Preço', validators=[DataRequired()])
+    categoria = StringField('Categoria')
+    ativo = BooleanField('Ativo')
+    submit = SubmitField('Salvar')
+
+# fim do formulário de produtos para CRUD
