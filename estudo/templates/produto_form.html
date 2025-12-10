@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block content %}
+{% block base %}
 
 <div class="container mt-4">
     <h2 class="mb-4 text-center">
@@ -50,7 +50,7 @@
             Salvar
         </button>
 
-        <a href="{{ url_for('listar_produtos') }}" class="btn btn-secondary w-100 mt-2">
+        <a href="{{ url_for('produtos_lista') }}" class="btn btn-secondary w-100 mt-2">
             Voltar
         </a>
 
