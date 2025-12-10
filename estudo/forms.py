@@ -195,11 +195,11 @@ from wtforms import DecimalField, BooleanField
 # from wtforms.validators import DataRequired
 
 class ProdutoForm(FlaskForm):
-    nome = StringField('Nome do produto', validators=[DataRequired()])
-    descricao = TextAreaField('Descrição')
-    preco = DecimalField('Preço', validators=[DataRequired()])
-    categoria = StringField('Categoria')
-    ativo = BooleanField('Ativo')
+    nome = StringField('Nome do produto:', validators=[DataRequired()])
+    descricao = TextAreaField('Descrição:')
+    preco = DecimalField('Preço:', validators=[DataRequired()])
+    categoria = StringField('Categoria:')
+    ativo = BooleanField('Ativo:')
     submit = SubmitField('Salvar')
 
 # fim do formulário de produtos para CRUD
