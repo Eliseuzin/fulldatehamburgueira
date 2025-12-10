@@ -166,7 +166,7 @@ def cadastroloja():
          loja=form.save()
          login_user(loja, remember=True)
          flash('Cadastro realizado com sucesso! Você já está logado', 'success')
-         return redirect(url_for('homepage'))
+         return redirect(url_for('dashboard_store'))
      
      
      return render_template('cadastroloja.html', form=form)
