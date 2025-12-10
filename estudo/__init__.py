@@ -86,8 +86,8 @@ login_manager=LoginManager(app)
 # controle de login
 login_manager.login_view='login'
 
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.create_all()
 
 # fazendo teste com o login de cliente e loja
 # significa que você está usando o Flask-Login, mas não definiu a função obrigatória user_loader — que é necessária para o login funcionar corretamente.
