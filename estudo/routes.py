@@ -313,8 +313,12 @@ def atualizar_cadastro_lojista():
 # from flask import render_template, redirect, url_for, request, flash
 # from flask_login import login_required, current_user
 # from estudo import db
+
+#rotas de criar, editar, listar e excluir produtos, CRUD
 from estudo.models import Produto
 from estudo.forms import ProdutoForm
+from werkzeug.utils import secure_filename
+import os
 
 
 # ----------------------------
@@ -335,14 +339,25 @@ def produtos_lista():
 @login_required
 def produto_novo():
     form = ProdutoForm()
-    
+    #para salvar a imagem
     if form.validate_on_submit():
+        imagem = form.imagem.data
+        nome_arquivo = None
+
+        if imagem:
+            nome_arquivo = secure_filename(imagem.filename)
+            caminho = os.path.join(app.config['UPLOAD_FOLDER'])
+            imagem.save(caminho)
+
         produto = Produto(
             loja_id=current_user.id,
             nome=form.nome.data,
             descricao=form.descricao.data,
             preco=form.preco.data,
-            categoria=form.categoria.data
+            categoria=form.categoria.data,
+            ativo=form.ativo.data,
+            imagem=nome_arquivo
+
         )
         db.session.add(produto)
         db.session.commit()
@@ -350,8 +365,6 @@ def produto_novo():
         return redirect(url_for('produtos_lista'))
     
     return render_template('produto_form.html', form=form, titulo="Novo Produto")
-
-
 
 # ----------------------------
 # EDITAR PRODUTO
@@ -364,17 +377,31 @@ def produto_editar(id):
     form = ProdutoForm(obj=produto)
 
     if form.validate_on_submit():
+        imagem = form.imagem.data
+
+        if imagem:
+            nome_arquivo = secure_filename(imagem.filename)
+            caminho = os.path.join(app.config['UPLOAD_FOLDER']), nome_arquivo
+
+            #CRIAR PASTA CASO NÃO EXISTA
+            os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+            imagem.save(caminho)
+            produto.imagem = nome_arquivo #ATUALIZAR
+        #SE NÃO ENVIAR IMAGEM => A ANTIGA PERMANECE
+
         produto.nome = form.nome.data
         produto.descricao = form.descricao.data
         produto.preco = form.preco.data
         produto.categoria = form.categoria.data
+        produto.ativo = form.ativo.data
+
 
         db.session.commit()
         flash("Produto atualizado com sucesso!", "success")
         return redirect(url_for('produtos_lista'))
 
     return render_template('produto_form.html', form=form, titulo="Editar Produto")
-
 
 
 # ----------------------------
