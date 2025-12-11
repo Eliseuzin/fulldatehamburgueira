@@ -193,6 +193,7 @@ class AtualizarLojistaForm(FlaskForm):
 # from wtforms import StringField, TextAreaField, SubmitField
 from wtforms import DecimalField, BooleanField
 # from wtforms.validators import DataRequired
+from flask_wtf.file import FileField, FileAllowed
 
 class ProdutoForm(FlaskForm):
     nome = StringField('Nome do produto:', validators=[DataRequired()])
@@ -200,6 +201,8 @@ class ProdutoForm(FlaskForm):
     preco = DecimalField('Preço:', validators=[DataRequired()])
     categoria = StringField('Categoria:')
     ativo = BooleanField('Ativo:')
+    imagem = FileField('Imagem do produto:', validators=[
+        FileAllowed(['jpg', 'jpeg', 'png', 'webp'], 'Ápenas imagens são permitidas!')])
     submit = SubmitField('Salvar')
 
 # fim do formulário de produtos para CRUD
