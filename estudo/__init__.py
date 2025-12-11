@@ -77,6 +77,13 @@ migrate=Migrate(app, db)
 
 # pip install Flask-Mail
 
+#inicio de controle de add imgagens ao produto
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
+app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024  # 2 MB
+app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.jpeg', '.webp']
+
+#fim de controle de add imgagens ao produto
+
 
 #inicio do controle de login
 from estudo.models import User, Store
