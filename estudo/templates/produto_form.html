@@ -5,8 +5,8 @@
     <h2 class="mb-4 text-center">
         {% if form.nome.data %}Editar Produto{% else %}Novo Produto{% endif %}
     </h2>
-
-    <form method="POST">
+     <!-- sem enctype="multipart/form-data" o browser NÃO envia arquivos. -->
+    <form method="POST" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
 
         <div class="mb-3">
@@ -40,6 +40,12 @@
                 <span class="text-danger">{{ error }}</span>
             {% endfor %}
         </div>
+
+        <div class="mb-3">
+            {{ form.imagem.label(class="form-label") }}
+            {{ form.imagem(class="form-control") }}
+        </div>
+
 
         <div class="form-check mb-3">
             {{ form.ativo(class="form-check-input") }}
