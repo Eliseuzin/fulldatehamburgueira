@@ -18,6 +18,7 @@
                     <th>Preço</th>
                     <th>Categoria</th>
                     <th>Ativo</th>
+                    <th>Imagem</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -37,11 +38,15 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a href="{{ url_for('editar_produto', id=produto.id) }}" class="btn btn-sm btn-warning">
+                        <img src="{{ url_for('static', filename='uploads/' ~ produto.imagem) }}" width="80">
+
+                    </td>
+                    <td>
+                        <a href="{{ url_for('produto_editar', id=produto.id) }}" class="btn btn-sm btn-warning">
                             Editar
                         </a>
 
-                        <form method="POST" action="{{ url_for('deletar_produto', id=produto.id) }}" class="d-inline">
+                        <form method="POST" action="{{ url_for('produto_excluir', id=produto.id) }}" class="d-inline">
                             <button class="btn btn-sm btn-danger" onclick="return confirm('Deseja excluir este produto?')">
                                 Excluir
                             </button>
@@ -57,6 +62,10 @@
             Nenhum produto cadastrado ainda.
         </div>
     {% endif %}
+    <div>
+         <a href="{{url_for('dashboard_store')}}" class="btn btn-primary">Tela principal</a>
+
+    </div>
 </div>
 
 {% endblock %}
