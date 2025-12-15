@@ -344,9 +344,13 @@ def produto_novo():
         imagem = form.imagem.data
         nome_arquivo = None
 
-        if imagem:
+        if imagem and imagem.filename:
             nome_arquivo = secure_filename(imagem.filename)
-            caminho = os.path.join(app.config['UPLOAD_FOLDER'])
+
+            # cria a pasta se não existir
+            os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+            caminho = os.path.join(app.config['UPLOAD_FOLDER'], nome_arquivo)
             imagem.save(caminho)
 
         produto = Produto(
@@ -361,6 +365,7 @@ def produto_novo():
         )
         db.session.add(produto)
         db.session.commit()
+        
         flash("Produto criado com sucesso!", "success")
         return redirect(url_for('produtos_lista'))
     
@@ -381,7 +386,7 @@ def produto_editar(id):
 
         if imagem:
             nome_arquivo = secure_filename(imagem.filename)
-            caminho = os.path.join(app.config['UPLOAD_FOLDER']), nome_arquivo
+            caminho = os.path.join(app.config['UPLOAD_FOLDER'], nome_arquivo)
 
             #CRIAR PASTA CASO NÃO EXISTA
             os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
