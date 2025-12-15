@@ -4,6 +4,12 @@ from estudo.utils import gerar_token, verificar_token, enviar_email
 if __name__=="__main__":
   #sempre que acontecer uma mudança ele estará iniciando novamente
   app.run(debug=True)
+  
+
+
+# 1️⃣ app.run() bloqueia a execução
+# ➡️ Tudo que vem depois dele não roda enquanto o servidor está ativo.
+
 
 #  Criar o ambiente virtual
 # No seu terminal (cmd), execute:
