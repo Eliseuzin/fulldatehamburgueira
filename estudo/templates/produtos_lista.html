@@ -38,8 +38,12 @@
                         {% endif %}
                     </td>
                     <td>
-                        <img src="{{ url_for('static', filename='uploads/' ~ produto.imagem) }}" width="80">
-
+                        {% if produto.imagem  %}
+                        <img src="{{url_for('static', filename='uploads/'~produto.iamgem)}}" alt="">
+                        {% else %}
+                        <!-- Aceitar vários formatos (png, jpg, jpeg, webp) -->
+                        <img src="{{ url_for('static', filename='uploads/padrao.png')}}" alt="">
+                        {% endif %}
                     </td>
                     <td>
                         <a href="{{ url_for('produto_editar', id=produto.id) }}" class="btn btn-sm btn-warning">
