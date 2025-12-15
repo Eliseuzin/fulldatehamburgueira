@@ -39,7 +39,7 @@
                     </td>
                     <td>
                         {% if produto.imagem  %}
-                        <img src="{{url_for('static', filename='uploads/'~produto.iamgem)}}" alt="">
+                        <img src="{{url_for('static', filename='uploads/'~produto.imagem)}}" alt="">
                         {% else %}
                         <!-- Aceitar vários formatos (png, jpg, jpeg, webp) -->
                         <img src="{{ url_for('static', filename='uploads/padrao.png')}}" alt="">
