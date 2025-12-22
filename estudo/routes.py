@@ -374,26 +374,37 @@ def produto_novo():
 # ----------------------------
 # EDITAR PRODUTO
 # ----------------------------
+
 @app.route('/produto/<int:id>/editar', methods=['GET', 'POST'])
 @login_required
 def produto_editar(id):
-    produto = Produto.query.filter_by(id=id, loja_id=current_user.id).first_or_404()
+    produto = Produto.query.filter_by(
+        id=id,
+        loja_id=current_user.id
+    ).first_or_404()
 
-    form = ProdutoForm(obj=produto)
+    form = ProdutoForm()
+
+    # popular campos manualmente (GET)
+    if request.method == 'GET':
+        form.nome.data = produto.nome
+        form.descricao.data = produto.descricao
+        form.preco.data = produto.preco
+        form.categoria.data = produto.categoria
+        form.ativo.data = produto.ativo
 
     if form.validate_on_submit():
-        imagem = form.imagem.data
+        imagem = form.imagem.data  # AGORA SEMPRE FileStorage ou None
 
-        if imagem:
+        if imagem and imagem.filename:
             nome_arquivo = secure_filename(imagem.filename)
+
+            os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
             caminho = os.path.join(app.config['UPLOAD_FOLDER'], nome_arquivo)
 
-            #CRIAR PASTA CASO NÃO EXISTA
-            os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
-
             imagem.save(caminho)
-            produto.imagem = nome_arquivo #ATUALIZAR
-        #SE NÃO ENVIAR IMAGEM => A ANTIGA PERMANECE
+            produto.imagem = nome_arquivo
+        # se não enviar imagem nova, mantém a antiga automaticamente
 
         produto.nome = form.nome.data
         produto.descricao = form.descricao.data
@@ -401,12 +412,17 @@ def produto_editar(id):
         produto.categoria = form.categoria.data
         produto.ativo = form.ativo.data
 
-
         db.session.commit()
         flash("Produto atualizado com sucesso!", "success")
         return redirect(url_for('produtos_lista'))
 
-    return render_template('produto_form.html', form=form, titulo="Editar Produto")
+    return render_template(
+        'produto_form.html',
+        form=form,
+        titulo="Editar Produto"
+    )
+
+
 
 
 # ----------------------------
