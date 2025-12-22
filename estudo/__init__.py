@@ -47,8 +47,8 @@ app = Flask(
     static_url_path='/static'
 )
 
-print("STATIC FOLDER:", app.static_folder)
-print("STATIC URL PATH:", app.static_url_path)
+# print("STATIC FOLDER:", app.static_folder)
+# print("STATIC URL PATH:", app.static_url_path)
 
 
 # Configurações do app (antes de criar mail, db, etc)
@@ -88,11 +88,18 @@ migrate=Migrate(app, db)
 # pip install Flask-Mail
 
 #inicio de controle de add imgagens ao produto
-app.config['UPLOAD_FOLDER'] = 'static/uploads'
+#import os(tive que fazer isto, pois estava criando outra página, consequentemene não abrindo img)
+#INÍCIO
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static', 'uploads')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+#FIM
+
 app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024  # 2 MB
 app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.jpeg', '.webp']
 
 #fim de controle de add imgagens ao produto
+
 
 
 #inicio do controle de login
