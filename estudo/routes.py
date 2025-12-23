@@ -25,13 +25,20 @@ from estudo.forms import AtualizarUsuarioForm, AtualizarLojistaForm  # ou ajuste
 
 from estudo.forms import UserForm, StoreForm
 
-
-@app.route("/", methods=["GET", "POST"])
+@app.route('/')
 def homepage():
-    # if current_user.is_authenticated:
-    #     return f'Olá, {current_user.nome}!'
-    # else:
-        return render_template('index.html')
+    if current_user.is_authenticated:
+        user_cookie = session.get('_user_id', '')
+
+        if user_cookie.startswith('store:'):
+            return redirect(url_for('dashboard_store'))
+        
+        if user_cookie.startswith('user:'):
+            return redirect(url_for('index'))
+        
+    return render_template('index.html')
+
+
 
 #rota para página inicial em todas as páginas
 @app.route("/index")
