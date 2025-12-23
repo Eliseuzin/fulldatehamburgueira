@@ -98,7 +98,7 @@ class StoreForm(FlaskForm):
     
 
 #há necessidade de criar duas class, caso contrário a segunda subescreve a primeira
-
+#login clientes
 class LoginForm(FlaskForm):
     email=StringField('E-mail', validators=[DataRequired(),Email()])
     senha=PasswordField('Senha', validators=[DataRequired()])
@@ -120,7 +120,7 @@ class LoginForm(FlaskForm):
              return
         if not check_password_hash(user.senha,senha.data):
             raise ValidationError('Senha incorreta, por favor, verifique a senha digitada!')
-        
+        #login lojista
 class LoginStore(FlaskForm):
     email=StringField('E-mail da loja', validators=[DataRequired(),Email()])
     senha=PasswordField('Senha', validators=[DataRequired()])
