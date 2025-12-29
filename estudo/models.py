@@ -78,9 +78,34 @@ class Produto(db.Model):
     # opcional: relacionamento
     loja = db.relationship('User', backref='produtos')
 
-
 # fim do model para produtos crud
 
+#inicio do model para gerenciar os pedidos(status) de pagamentos
+# from datetime import datetime
+
+class Pedidos(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    loja_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    
+
+
+#fim do model para gerenciar os pedidos(status) de pagamentos
+
+
+# from datetime import datetime
+
+# class Pedido(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+
+#     loja_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+#     cliente_nome = db.Column(db.String(120), nullable=False)
+#     total = db.Column(db.Numeric(10, 2), nullable=False)
+
+#     status = db.Column(db.String(20), default='pendente')
+#     criado_em = db.Column(db.DateTime, default=datetime.utcnow)
 
 
 
