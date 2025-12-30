@@ -18,12 +18,16 @@ from estudo.models import User, Store  # seu modelo de usuário
 from estudo.forms import RedefinirSenhaForm
 from estudo.utils import verificar_token
 from werkzeug.security import generate_password_hash
-
 from estudo.forms import AtualizarUsuarioForm, AtualizarLojistaForm  # ou ajuste o nome conforme necessário
-
-
-
 from estudo.forms import UserForm, StoreForm
+
+#rotas pedidos
+from flask import Pedidos
+
+
+
+
+
 
 @app.route('/')
 def homepage():
@@ -449,4 +453,16 @@ def produto_excluir(id):
 
 # fim das rotas para produtos CRUD
 
-    
+# from flask import Pedidos
+
+#inicio das rotas para lojista terem acesso aos status de pedidos
+@app.route('/pedidos')
+@login_required
+def pedidos():
+    pedidos= Pedidos.query.filter_by(
+        loja_id=current_user.id
+    ).order_by(Pedidos.id.desc()).all()
+
+    return render_template('pedidos/lista.html', pedidos=pedidos)
+
+#fim das rotas para lojista terem acesso aos status de pedidos
