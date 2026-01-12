@@ -22,7 +22,7 @@ from estudo.forms import AtualizarUsuarioForm, AtualizarLojistaForm  # ou ajuste
 from estudo.forms import UserForm, StoreForm
 
 #rotas pedidos
-from flask import Pedidos
+# from flask import Pedidos
 
 
 
@@ -101,7 +101,7 @@ def login():
         flash('Login realizado com sucesso!', 'success')
         return redirect(url_for('homepage'))
 
-    return render_template('login.html', form=form)
+    return render_template('auth/login.html', form=form)
 
 
 #login para lojistas
@@ -114,7 +114,7 @@ def login_store():
         flash("Login da loja realizado com sucesso!", "success")
         return redirect(url_for("dashboard_store"))
 
-    return render_template("login_store.html", form=form)
+    return render_template("auth/login_store.html", form=form)
 
 
 @app.route("/dashboard_store")
@@ -159,7 +159,7 @@ def cadastrousuario():
         return redirect(url_for('homepage'))
 
 
-    return render_template('cadastrousuario.html', form=form)
+    return render_template('cadastros/cadastrousuario.html', form=form)
 
 @app.route('/sair/')
 def logout():
@@ -180,7 +180,7 @@ def cadastroloja():
          return redirect(url_for('dashboard_store'))
      
      
-     return render_template('cadastroloja.html', form=form)
+     return render_template('cadastros/cadastroloja.html', form=form)
         
 # rota de erro
 @app.errorhandler(404)
@@ -229,7 +229,7 @@ def recuperar_senha():
             link = url_for('redefinir_senha', token=token, _external=True)
 
             # Renderiza o template do e-mail com o link
-            corpo_email = render_template('email_redefinir_senha.html', link=link)
+            corpo_email = render_template('cadastros/email_redefinir_senha.html', link=link)
 
             enviar_email(user.email, 'Redefinir sua senha', corpo_email)
             flash('Enviamos um link para redefinir sua senha no seu email.', 'info')
@@ -238,7 +238,7 @@ def recuperar_senha():
         else:
             flash('Email não encontrado.', 'warning')
         # return redirect(url_for('login'))
-    return render_template('recuperar_senha.html', form=form)
+    return render_template('cadastros/recuperar_senha.html', form=form)
 
 
 
@@ -262,7 +262,7 @@ def redefinir_senha(token):
             flash('Usuário não encontrado.', 'danger')
             return redirect(url_for('recuperar_senha'))
 
-    return render_template('redefinir_senha.html', form=form)
+    return render_template('cadastros/redefinir_senha.html', form=form)
 
 
 #atualizar cadastro
@@ -289,7 +289,7 @@ def atualizar_cadastro():
         flash('Seus dados foram atualizados com sucesso!', 'success')
         return redirect(url_for('homepage'))
 
-    return render_template('atualizar_cadastro.html', form=form)
+    return render_template('cadastros/atualizar_cadastro.html', form=form)
 
 @app.route('/atualizar_cadastro_lojista/', methods=['GET', 'POST'])
 @login_required#server para impedir que alguém edite  os dados de outro usuário ou da loja sem está logado
@@ -314,7 +314,7 @@ def atualizar_cadastro_lojista():
         flash('Seus dados foram atualizados com succeso!','success')
         return redirect(url_for('dashboard_store'))
     
-    return render_template('atualizar_cadastro_lojista.html', form=form)
+    return render_template('cadastros/atualizar_cadastro_lojista.html', form=form)
 
 
 # rotas para produtos CRUD
@@ -339,7 +339,7 @@ import os
 @login_required
 def produtos_lista():
     produtos = Produto.query.filter_by(loja_id=current_user.id).all()
-    return render_template('produtos_lista.html', produtos=produtos)
+    return render_template('produtos/produtos_lista.html', produtos=produtos)
 
 
 
@@ -380,7 +380,7 @@ def produto_novo():
         flash("Produto criado com sucesso!", "success")
         return redirect(url_for('produtos_lista'))
     
-    return render_template('produto_form.html', form=form, titulo="Novo Produto")
+    return render_template('produtos/produto_form.html', form=form, titulo="Novo Produto")
 
 # ----------------------------
 # EDITAR PRODUTO
@@ -428,7 +428,7 @@ def produto_editar(id):
         return redirect(url_for('produtos_lista'))
 
     return render_template(
-        'produto_form.html',
+        'produtos/produto_form.html',
         form=form,
         titulo="Editar Produto"
     )
@@ -453,7 +453,7 @@ def produto_excluir(id):
 
 # fim das rotas para produtos CRUD
 
-# from flask import Pedidos
+from estudo.models import Pedidos
 
 #inicio das rotas para lojista terem acesso aos status de pedidos
 @app.route('/pedidos')
