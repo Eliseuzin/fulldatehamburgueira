@@ -7,6 +7,7 @@ if __name__=="__main__":
   
 
 
+
 # 1️⃣ app.run() bloqueia a execução
 # ➡️ Tudo que vem depois dele não roda enquanto o servidor está ativo.
 
