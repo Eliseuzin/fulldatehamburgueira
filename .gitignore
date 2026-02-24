@@ -1,11 +1,33 @@
-#uns dos primeiros arquivos a serem criados
-.venv
-#ignorar arquivos python compilado
-__pycache__/
-*.pyc
-#ignorar arquivos de ambiente "env"
+# Ambiente virtual
+venv/
+.venv/
+
+# Arquivos de ambiente
 .env
 
+# Cache do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
-# Assim o Git não vai tentar salvar caminhos quebrados no repositório.
-venv/
+# Banco de dados SQLite
+*.db
+*.sqlite3
+
+# Pasta instance do Flask (contém database.db)
+instance/
+
+# Uploads (opcional, se não quiser enviar imagens de teste)
+# static/uploads/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos do VS Code (opcional)
+.vscode/
+
+# Arquivos temporários
+*.log
+*.tmp
