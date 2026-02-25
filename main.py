@@ -66,3 +66,9 @@ if __name__=="__main__":
 #     db.session.commit()
 #     print(f"{total} usuários apagados.")
 
+
+#exs. de commits
+
+#git add requirements.txt
+#git commit -m "adicionando requirements.txt"
+#git push
