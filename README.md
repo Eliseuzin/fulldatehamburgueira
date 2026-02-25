@@ -75,6 +75,12 @@ wsgi.py
 ---------------------------------------------------------
 
 
+## 👨‍💻 Autor
+
+Eliseu Matos da Silva
+
+Projeto desenvolvido para estudo e prática de desenvolvimento backend com Flask.
+
 
 
 ## ▶ Como Executar o Projeto
@@ -94,12 +100,9 @@ python main.py
 
 -------------------------------------------------
 
+ ▶ Como Executar o Projeto
 
-👨‍💻 Autor
 
-Eliseu Matos da Silva
-
-Projeto desenvolvido para estudo e prática de desenvolvimento backend com Flask.
 
 
 -------------------------------------------------
