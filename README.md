@@ -51,18 +51,26 @@ Sistema web completo desenvolvido com Python e Flask para gerenciamento de produ
 
 ## 📂 Estrutura do Projeto
 
-estudo/
-├── models.py
-├── routes.py
-├── forms.py
-├── init.py
+estudo>
 
 static/
 templates/
+
+├── init.py
+├── forms.py
+├── models.py
+├── routes.py
+├── utils.py
+├── verificar_senha_digitada.py
+
+instance/
 migrations/
 
+creat.key.py
 main.py
 wsgi.py
+
+
 
 ---------------------------------------------------------
 
