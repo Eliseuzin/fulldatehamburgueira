@@ -18,7 +18,7 @@ Sistema web completo desenvolvido com Python e Flask para gerenciamento de produ
 
 ### 🏪 Lojista
 - Login exclusivo
-- Dashboard administrativo
+- Dashboard administrativo(futuro)
 - Criar, editar e desativar produtos
 - Upload de imagens
 - Gerenciar pedidos
