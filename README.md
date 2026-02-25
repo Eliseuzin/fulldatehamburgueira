@@ -95,14 +95,3 @@ venv\Scripts\activate  # Windows
 pip install -r requirements.txt
 
 python main.py
-
-
-
--------------------------------------------------
-
- ▶ Como Executar o Projeto
-
-
-
-
--------------------------------------------------
